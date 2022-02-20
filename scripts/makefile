@@ -18,7 +18,7 @@ clean:
 		rm -f $$execfile; \
 	done
 uninstall: 
-	for execfile in $(INSTALL); do \
+	@for execfile in $(INSTALL); do \
 		echo "rm -f $(EXECDIR)/$$execfile" ; \
 		rm -f $(EXECDIR)/$$execfile; \
 	done
