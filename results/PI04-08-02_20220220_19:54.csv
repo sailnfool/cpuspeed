@@ -1,0 +1,6 @@
+Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date|Dictionary bytes|Iterations|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+aarch64|4|1500.0000|3.7Gi|2.1Gi|732Mi|3.3Gi|740Mi|2.6Gi|ubuntu|108.00||976241|1024|b2sum|17.08|9.34|7.95|999
+Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date|Dictionary bytes|Iterations|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+aarch64|4|1500.0000|3.7Gi|2.1Gi|735Mi|3.3Gi|740Mi|2.6Gi|ubuntu|108.00||976241|1024|sha1sum|13.80|6.42|7.60|999
+Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date|Dictionary bytes|Iterations|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+aarch64|4|1500.0000|3.7Gi|2.1Gi|728Mi|3.3Gi|740Mi|2.6Gi|ubuntu|108.00||976241|1024|sha256sum|16.79|9.51|7.48|999
