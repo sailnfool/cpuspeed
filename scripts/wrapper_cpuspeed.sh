@@ -139,7 +139,7 @@ fi
 outdir=$HOME/github/cpuspeed/results
 testoutput=${testname}.csv
 rawout=${testname}.raw
-scripter=script.sh
+scripter=script_$(hostname).sh
 outfile=${outdir}/${testoutput}
 max=${maxiterations}
 
