@@ -13,6 +13,10 @@ install:
 	cd scripts
 	make uninstall install clean
 	cd ..
+uninstall:
+	cd scripts
+	make uninstall
+	cd ..
 sinstall:
 	cd scripts
 	make suninstall sinstall clean
