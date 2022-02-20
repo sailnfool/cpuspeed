@@ -42,9 +42,15 @@ do
   then
     errecho "-e" "Cryptographic Hash Function ${myhash} not found"
     errecho "-e" "Have you installed the \"coreutils\" package?"
-    errecho "-e" "sudo apt install coreutils"
+    sudo apt install coreutils
   fi
 done
+if [[ ! $(which time) ]]
+then
+  errecho "-e" "/usr/bin/time not found"
+  errecho "-e" "Have you installed the time package?"
+  sudo apt install time
+fi
 
 UCTdatetime=$(date -u "+%Y%m%d_%R")
 testname="$(hostname)_${UCTdatetime}"
@@ -151,9 +157,9 @@ max=${maxiterations}
 # The output of this command is suitable for piping into bash or for
 # placing in a file to be executed later.
 ########################################################################
+rm -f ${outdir}/${scripter} ${outfile} ${outdir}/sorted.${testoutput}
 echo "#!/bin/bash" | tee -a ${outdir}/${scripter}
 count=1
-rm -f ${outdir}/${scripter} ${outfile} ${outdir}/sorted.${testoutput}
 while [[ ${count} -le ${max} ]]
 do
   for myhash in "${!hashes[@]}"
