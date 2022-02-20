@@ -5,6 +5,9 @@ scripts:
 	cd scripts
 	make uninstall install
 	cd ..
+	cd func
+	make uninstall install
+	cd ..
 test:
 	cd tests
 	bash dotests.sh
