@@ -271,4 +271,4 @@ echo -n "$(func_os)|${bogomips}|${UCTdatetime}|"
 echo -n "${dictsize}|${iterations}|"
 echo -n "${hashprogram}|${elapsedseconds}|${userseconds}|"
 echo -n "${systemseconds}|"
-echo " ( ${dictsize} * ${iterations} ) / 1000000" | bc
+echo " ( ${dictsize} * ${iterations} ) / ${elapsedseconds}" | bc
