@@ -1,13 +1,50 @@
 #!/bin/bash
+scriptname=${0##*/}
+########################################################################
+# Copyright (c) 2020 Sea2Cloud Storage, Inc.  All Rights Reserved
+# Modesto, CA 95356
+#
+# wrapper_cpuspeed - generate a script that will repeatedly invoke a 
+#                    list of hash functions with different repetition
+#                    counts for the cpuspeed_function
+# Author - Robert E. Novak aka REN
+#	sailnfool@gmail.com
+#	skype:sailnfool.ren
+# License CC by Sea2Cloud Storage, Inc.
+# see https://creativecommons.org/licenses/by/4.0/legalcode
+# for a complete copy of the Creative Commons Attribution license
+#_____________________________________________________________________
+# Rev.|Auth.| Date     | Notes
+#_____________________________________________________________________
+# 1.0 | REN |02/20/2022| Initial Release
+#_____________________________________________________________________
+########################################################################
 source func.kbytes
 source func.nice2num
 source func.errecho
 source func.insufficient
 source func.regex
 
-declare -a hashes
 
+########################################################################
+# Declare the list of default hash functions that will be tested
+########################################################################
+declare -a hashes
 hashes=("b2sum" "sha1sum" "sha256sum" "sha512sum")
+
+########################################################################
+# Verify that binaries for each of the hash functions are found on 
+# this machine
+########################################################################
+for myhash in "${!hashes[@]}"
+do
+  if [[ ! $(which ${myhash}) ]]
+  then
+    errecho "-e" "Cryptographic Hash Function ${myhash} not found"
+    errecho "-e" "Have you installed the \"coreutils\" package?"
+    errecho "-e" "sudo apt install coreutils"
+  fi
+done
 
 UCTdatetime=$(date -u "+%Y%m%d_%R")
 testname="$(hostname)_${UCTdatetime}"
