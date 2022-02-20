@@ -114,15 +114,15 @@ max=${maxiterations}
 # The output of this command is suitable for piping into bash or for
 # placing in a file to be executed later.
 ########################################################################
-echo "#!/bin/bash"
+echo "#!/bin/bash" | tee -a ${outdir}/${scripter}
 count=1
 rm -f ${outdir}/${scripter} ${outfile} ${outdir}/sorted.${testoutput}
 while [[ ${count} -le ${max} ]]
 do
   for myhash in "${!hashes[@]}"
   do
-    echo "cpuspeed_function -n -s ${hashes[${myhash}]} ${count}Kib" | 
-      tee -a ${outdir}/${scripter}
+    echo "cpuspeed_function -n -s ${hashes[${myhash}]} ${count}Kib |" \
+      "tee -a ${outdir}/${testoutput}" | tee -a ${outdir}/${scripter}
   done
   if [[ "${count}" -eq "1" ]]
   then
