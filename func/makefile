@@ -1,6 +1,6 @@
 .PHONY: all scripts
 .ONESHELL:
-all: scripts
+all: scripts test
 scripts:
 	cd scripts
 	make uninstall install
