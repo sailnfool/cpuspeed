@@ -3,7 +3,7 @@
 all: scripts
 scripts:
 	cd scripts
-	make uninstall install
+	make uninstall install clean
 	cd ..
 	cd func
 	make uninstall install
