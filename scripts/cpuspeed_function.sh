@@ -253,7 +253,7 @@ swapfree=$(free -h | awk '/^Swap:/ {print $4}')
 # echo "swapfree=${swapfree}"
 bogomips=$(lscpu | grep -i "bogomips" | \
   sed "s/^.*:[^0-9]*\([0-9\.][0-9\.]*\)/\1/")
-UCTdatetime=$(date -u "+%Y%m%d_%R")
+UCTdatetime=$(date -u "+%Y%m%d_%H%M")
 dictsize=$(stat --printf="%s" /usr/share/dict/${language})
 totsize=$(echo "${dictsize} * ${iterations}" | bc)
 echo -n "Architecture|cores|CPU max MHz|"

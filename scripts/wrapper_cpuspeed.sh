@@ -52,7 +52,7 @@ then
   sudo apt install time
 fi
 
-UCTdatetime=$(date -u "+%Y%m%d_%R")
+UCTdatetime=$(date -u "+%Y%m%d_%H%M")
 testname="$(hostname)_${UCTdatetime}"
 maxiterations=50
 iterincrement=10
