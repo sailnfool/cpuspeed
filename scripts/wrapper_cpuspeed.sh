@@ -38,9 +38,9 @@ hashes=("b2sum" "sha1sum" "sha256sum" "sha512sum")
 ########################################################################
 for myhash in "${!hashes[@]}"
 do
-  if [[ ! $(which ${myhash}) ]]
+  if [[ ! $(which ${hashes[${myhash}]}) ]]
   then
-    errecho "-e" "Cryptographic Hash Function ${myhash} not found"
+    errecho "-e" "Cryptographic Hash Function ${hashes[${myhash}]} not found"
     errecho "-e" "Have you installed the \"coreutils\" package?"
     sudo apt install coreutils
   fi
