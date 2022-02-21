@@ -1,0 +1,2 @@
+Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date|Dictionary bytes|Iterations|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+aarch64|4|1200.0000|909Mi|291Mi|117Mi|99Mi|99Mi|0.0Ki|debian|38.40|20220220_22:34|976241|1024|b2sum||||
