@@ -138,3 +138,60 @@ Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|
 aarch64|4|1200.0000|909Mi|753Mi|29Mi|99Mi|99Mi|0B|debian|38.40|20220221_1056|976241|87040|b2sum|992.51|632.34|377.33|85613259
 Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date|Dictionary bytes|Iterations|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
 aarch64|4|1200.0000|909Mi|795Mi|31Mi|99Mi|99Mi|0B|debian|38.40|20220221_1116|976241|87040|sha1sum|1196.11|827.07|379.33|71040302
+Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date|Dictionary bytes|Iterations|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+aarch64|4|1200.0000|909Mi|292Mi|398Mi|99Mi|91Mi|8.0Mi|debian|38.40|20220221_1148|976241|87040|sha256sum|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:229: 
+	Insufficient parameters at least one argument in time format required, need 1|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:223: 
+	Insufficient parameters at least one argument in time format required, need 1|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:226: 
+	Insufficient parameters at least one argument in time format required, need 1|Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date|Dictionary bytes|Iterations|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+aarch64|4|1200.0000|909Mi|292Mi|392Mi|99Mi|91Mi|8.0Mi|debian|38.40|20220221_1210|976241|87040|sha512sum|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:229: 
+	Insufficient parameters at least one argument in time format required, need 1|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:223: 
+	Insufficient parameters at least one argument in time format required, need 1|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:226: 
+	Insufficient parameters at least one argument in time format required, need 1|Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date|Dictionary bytes|Iterations|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+aarch64|4|1200.0000|909Mi|291Mi|383Mi|99Mi|91Mi|8.0Mi|debian|38.40|20220221_1228|976241|92160|b2sum|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:229: 
+	Insufficient parameters at least one argument in time format required, need 1|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:223: 
+	Insufficient parameters at least one argument in time format required, need 1|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:226: 
+	Insufficient parameters at least one argument in time format required, need 1|Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date|Dictionary bytes|Iterations|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+aarch64|4|1200.0000|909Mi|292Mi|383Mi|99Mi|91Mi|8.0Mi|debian|38.40|20220221_1249|976241|92160|sha1sum|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:229: 
+	Insufficient parameters at least one argument in time format required, need 1|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:223: 
+	Insufficient parameters at least one argument in time format required, need 1|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:226: 
+	Insufficient parameters at least one argument in time format required, need 1|Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date|Dictionary bytes|Iterations|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+aarch64|4|1200.0000|909Mi|292Mi|382Mi|99Mi|91Mi|8.0Mi|debian|38.40|20220221_1320|976241|92160|sha256sum|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:229: 
+	Insufficient parameters at least one argument in time format required, need 1|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:223: 
+	Insufficient parameters at least one argument in time format required, need 1|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:226: 
+	Insufficient parameters at least one argument in time format required, need 1|Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date|Dictionary bytes|Iterations|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+aarch64|4|1200.0000|909Mi|292Mi|382Mi|99Mi|91Mi|8.0Mi|debian|38.40|20220221_1344|976241|92160|sha512sum|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:229: 
+	Insufficient parameters at least one argument in time format required, need 1|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:223: 
+	Insufficient parameters at least one argument in time format required, need 1|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:226: 
+	Insufficient parameters at least one argument in time format required, need 1|Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date|Dictionary bytes|Iterations|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+aarch64|4|1200.0000|909Mi|291Mi|383Mi|99Mi|91Mi|8.0Mi|debian|38.40|20220221_1403|976241|97280|b2sum|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:229: 
+	Insufficient parameters at least one argument in time format required, need 1|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:223: 
+	Insufficient parameters at least one argument in time format required, need 1|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:226: 
+	Insufficient parameters at least one argument in time format required, need 1|Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date|Dictionary bytes|Iterations|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+aarch64|4|1200.0000|909Mi|291Mi|322Mi|99Mi|91Mi|8.0Mi|debian|38.40|20220221_1425|976241|97280|sha1sum|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:229: 
+	Insufficient parameters at least one argument in time format required, need 1|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:223: 
+	Insufficient parameters at least one argument in time format required, need 1|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:226: 
+	Insufficient parameters at least one argument in time format required, need 1|Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date|Dictionary bytes|Iterations|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+aarch64|4|1200.0000|909Mi|291Mi|321Mi|99Mi|91Mi|8.0Mi|debian|38.40|20220221_1458|976241|97280|sha256sum|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:229: 
+	Insufficient parameters at least one argument in time format required, need 1|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:223: 
+	Insufficient parameters at least one argument in time format required, need 1|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:226: 
+	Insufficient parameters at least one argument in time format required, need 1|Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date|Dictionary bytes|Iterations|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+aarch64|4|1200.0000|909Mi|291Mi|322Mi|99Mi|91Mi|8.0Mi|debian|38.40|20220221_1522|976241|97280|sha512sum|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:229: 
+	Insufficient parameters at least one argument in time format required, need 1|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:223: 
+	Insufficient parameters at least one argument in time format required, need 1|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:226: 
+	Insufficient parameters at least one argument in time format required, need 1|Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date|Dictionary bytes|Iterations|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+aarch64|4|1200.0000|909Mi|291Mi|321Mi|99Mi|91Mi|8.0Mi|debian|38.40|20220221_1542|976241|102400|b2sum|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:229: 
+	Insufficient parameters at least one argument in time format required, need 1|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:223: 
+	Insufficient parameters at least one argument in time format required, need 1|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:226: 
+	Insufficient parameters at least one argument in time format required, need 1|Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date|Dictionary bytes|Iterations|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+aarch64|4|1200.0000|909Mi|291Mi|321Mi|99Mi|91Mi|8.0Mi|debian|38.40|20220221_1606|976241|102400|sha1sum|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:229: 
+	Insufficient parameters at least one argument in time format required, need 1|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:223: 
+	Insufficient parameters at least one argument in time format required, need 1|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:226: 
+	Insufficient parameters at least one argument in time format required, need 1|Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date|Dictionary bytes|Iterations|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+aarch64|4|1200.0000|909Mi|291Mi|321Mi|99Mi|91Mi|8.0Mi|debian|38.40|20220221_1641|976241|102400|sha256sum|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:229: 
+	Insufficient parameters at least one argument in time format required, need 1|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:223: 
+	Insufficient parameters at least one argument in time format required, need 1|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:226: 
+	Insufficient parameters at least one argument in time format required, need 1|Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date|Dictionary bytes|Iterations|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+aarch64|4|1200.0000|909Mi|291Mi|321Mi|99Mi|91Mi|8.0Mi|debian|38.40|20220221_1706|976241|102400|sha512sum|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:229: 
+	Insufficient parameters at least one argument in time format required, need 1|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:223: 
+	Insufficient parameters at least one argument in time format required, need 1|/home/pi/bin/func.toseconds->cpuspeed_function::toseconds:226: 
+	Insufficient parameters at least one argument in time format required, need 1|
