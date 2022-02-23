@@ -272,3 +272,5 @@ echo -n "${dictsize}|${iterations}|"
 echo -n "${hashprogram}|${elapsedseconds}|${userseconds}|"
 echo -n "${systemseconds}|"
 echo " ( ${dictsize} * ${iterations} ) / ${elapsedseconds}" | bc
+echo " ( ${dictsize} * ${iterations} ) / ${userseconds}" | bc
+echo " ( ${dictsize} * ${iterations} ) / ${systemseconds}" | bc
