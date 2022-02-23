@@ -8,6 +8,22 @@ declare -a fieldnames=( \
  "Dictionary bytes" "Iterations" \
  "Cryptographic Hash" "WallTime" "UserTime" "Systime" \
  "MB/Sec Wall" "MB/Sec User" "MB/Sec System" )
+#
+# Generate a script that will extract the named columns into a new
+# file by generating an awk script to trim down the data
+#
+declare -a selectedfields=(
+ "Architecture" "cores" "CPU max MHz" \
+ "MEM Total"  \
+ "Iterations" \
+ "Cryptographic Hash" )
+
+ declare -A fieldnumbers
+ 
+
+ echo "#!/bin/bash"
+
+
 	linesread=0
 	OLDIFS=$IFS
 	IFS="|"
