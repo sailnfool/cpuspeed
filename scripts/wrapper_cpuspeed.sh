@@ -16,6 +16,8 @@ scriptname=${0##*/}
 #_____________________________________________________________________
 # Rev.|Auth.| Date     | Notes
 #_____________________________________________________________________
+# 1.1 | REN |02/24/2022| Added a parameter to override the date stamp
+#                      | placed on the results csv file.
 # 1.0 | REN |02/20/2022| Initial Release
 #_____________________________________________________________________
 ########################################################################
@@ -56,6 +58,7 @@ UCTdatetime=$(date -u "+%Y%m%d_%H%M")
 testname="$(hostname)_${UCTdatetime}"
 maxiterations=50
 iterincrement=10
+suffix=${UCTdatetime}
 ########################################################################
 # Process the command line options
 ########################################################################
@@ -65,16 +68,23 @@ USAGE="${0##*/} [-h] [-f <testname>i] [<maxiterations> [<increment>]]\r\n
 \t\tis multiplied by 1024\r\n
 \t\t<increment> (default ${iterincrement}) is the number of\r\n
 \t\tof iterations to bump the test count by each time\t\n
-\t\twhere <testname> (default ${testname}) is the name of the CSV\r\n
-\t\tfile where the results are tabulated\r\n
+\t-d\t<suffix>\tis the string just prior to the ".csv" extension that
+\t\t\tcan uniquely identify the generate script.  The default is
+\t\t\tnormally the current date time (e.g. ${UCTdatetime})
+\t-f\t<testname> (default ${testname}) is the name of the CSV\r\n
+\t\t\tfile where the results are tabulated\r\n
 "
 
-optionargs="hf:"
+optionargs="d:hf:"
 NUMARGS=0 #No arguments are mandatory
 
 while getopts ${optionargs} name
 do
   case ${name} in
+  d)
+    suffix="${OPTARG}"
+    testname="$(hostname)_${suffix}"
+    ;;
   h)
     echo -e ${USAGE}
     exit 0
