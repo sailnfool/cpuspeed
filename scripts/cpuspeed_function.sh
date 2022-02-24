@@ -256,6 +256,9 @@ bogomips=$(lscpu | grep -i "bogomips" | \
 UCTdatetime=$(date -u "+%Y%m%d_%H%M")
 dictsize=$(stat --printf="%s" /usr/share/dict/${language})
 totsize=$(echo "${dictsize} * ${iterations}" | bc)
+elapsedrate=$(echo "( ${totsize} / ${elapsedseconds} ) / 1000000" | bc)
+userrate=$(echo "( ${totsize} / ${userseconds} ) / 1000000" | bc)
+systemrate=$(echo "( ${totsize} / ${systemseconds} ) / 1000000" | bc)
 echo -n "Architecture|cores|CPU max MHz|"
 echo -n "MEM Total|MEM Used|MEM Free|"
 echo -n "SWAP Total|SWAP Used|SWAP Free|"
@@ -268,9 +271,7 @@ echo -n "${Arch}|${cores}|${maxCPU}|"
 echo -n "${memtotal}|${memused}|${memfree}|"
 echo -n "${swaptotal}|${swapused}|${swapfree}|"
 echo -n "$(func_os)|${bogomips}|${UCTdatetime}|"
-echo -n "${dictsize}|${iterations}|"
-echo -n "${hashprogram}|${elapsedseconds}|${userseconds}|"
-echo -n "${systemseconds}|"
-echo " ( ${dictsize} * ${iterations} ) / ${elapsedseconds}" | bc
-echo " ( ${dictsize} * ${iterations} ) / ${userseconds}" | bc
-echo " ( ${dictsize} * ${iterations} ) / ${systemseconds}" | bc
+echo -n "${dictsize}|${iterations}|${hashprogram}|"
+echo -n "${elapsedseconds}|${userseconds}|${systemseconds}|"
+echo -n "${elapsedrate}|${userrate}|${systemrate}"
+echo ""
