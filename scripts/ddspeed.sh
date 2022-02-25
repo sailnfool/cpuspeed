@@ -217,13 +217,13 @@ systemseconds=$(toseconds ${systemtime})
 elapsedtime=$(cat ${TIMER_OUT} | \
   sed -e '2d' -e '1,1s/^.*system \([0-9:\.][0-9:\.]*\)elapsed.*$/\1/')
 elapsedseconds=$(toseconds ${elapsedtime})
-if [[ "${timerfailure}" == "FALSE" ]]
+if [[ "${timerfailure}" == "TRUE" ]]
 then
   rm -f ${TIMER_APP} ${TIMER_OUT}
+  Arch="FAILURE - $(uname -m)"
 else
-  bash -x ${TIMER_APP}
+  Arch=$(uname -m)
 fi
-Arch=$(uname -m)
 maxCPU=$(lscpu | grep  -i "CPU max MHz" | \
   sed "s/^.*:[^0-9]*\([0-9\.][0-9\.]*\)/\1/")
 cores=$(lscpu | grep -i "^CPU(s)" |
