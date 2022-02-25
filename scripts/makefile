@@ -3,14 +3,14 @@ SHELL=/bin/bash
 	@rm -f $@
 	cp $< $@
 INSTALL = cpuspeed_function wrapper_cpuspeed dwrapper_cpuspeed \
-					ddspeed
+					ddspeed mcspeed mwrapper
 
 EXECDIR := $(HOME)/bin
 
-.PHONY: clean uninstall all
+.PHONY: uninstall all
 all: $(INSTALL)
 install: $(INSTALL)
-	mkdir -p $(EXECDIR)
+	@mkdir -p $(EXECDIR)
 	install -g $(USER) -o $(USER) -C $? $(EXECDIR)
 	rm -f $?
 clean: 

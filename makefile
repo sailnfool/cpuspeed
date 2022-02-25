@@ -3,7 +3,7 @@
 all: scripts
 scripts:
 	cd scripts
-	make uninstall install clean
+	make uninstall install
 	cd ..
 	cd func
 	make uninstall install
@@ -12,10 +12,10 @@ test:
 	cd tests
 	bash dotests.sh
 	cd ..
-install:
-	cd scripts
-	make uninstall install clean
-	cd ..
+# install:
+	# cd scripts
+	# make uninstall install clean
+	# cd ..
 sinstall:
 	cd scripts
 	make suninstall sinstall clean
