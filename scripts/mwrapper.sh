@@ -84,6 +84,12 @@ USAGE="${0##*/} [-h] [-c <#>] [-w <#>] [-d <suffix>] [-f <testname>i] [-n]\r\n
 \t\t\ttabulated.\r\n
 \t-h\t\tOutput this message\r\n
 \t-n\t\tSend the hash output to /dev/null\r\n
+\t-s\t<hashprogram>\tSpecify which cryptographic hash\r\n
+\t\t\tprogram to use valid values:\r\n
+\t\t\tb2sum; sha1sum; sha256sum; sha512sum\r\n
+\t\t\tor the special case \"dd\" which helps measure\r\n
+\t\t\tthe file operations (open, read, write)\r\n
+\t\t\twithout the cryptographic processing\r\n
 \t-w\t<#>\tthe divisor used to provide a \"wait\" time for the \r\n
 \t\t\tcopies operation to complete.  When making (e.g. 512)\r\n
 \t\t\tcopies tof dictionary that is ~1MB in size, it takes\r\n
@@ -96,7 +102,7 @@ USAGE="${0##*/} [-h] [-c <#>] [-w <#>] [-d <suffix>] [-f <testname>i] [-n]\r\n
 \t\t\tmileage may vary so perform your own testing.\r\n
 "
 
-optionargs="c:d:hf:nw:"
+optionargs="c:d:hf:ns:w:"
 NUMARGS=0 #No arguments are mandatory
 
 while getopts ${optionargs} name
@@ -125,6 +131,36 @@ do
     ;;
   n)
     OUTFILE="/dev/null"
+    ;;
+  s)
+    hashprogram="${OPTARG}"
+    case ${hashprogram} in
+      dd)
+        hashprogram=$(which ${hashprogram})
+        hashprogram=${hashprogram##*/}
+        hashes=("dd")
+        ;;
+       b2sum)
+        hashprogram=$(which ${hashprogram})
+        hashprogram=${hashprogram##*/}
+        ;;
+      sha1sum)
+        hashprogram=$(which ${hashprogram})
+        hashprogram=${hashprogram##*/}
+        ;;
+      sha256sum)
+        hashprogram=$(which ${hashprogram})
+        hashprogram=${hashprogram##*/}
+        ;;
+      sha512sum)
+        hashprogram=$(which ${hashprogram})
+        hashprogram=${hashprogram##*/}
+        ;;
+      \?)
+        errecho "-e" "Invalid hash program: ${OPTARG}"
+        errecho "-e" ${USAGE}
+        exit 2
+    esac
     ;;
   w)
     if [[ "${OPTARG}" =~ $re_integer ]]
