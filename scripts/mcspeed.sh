@@ -91,35 +91,40 @@ USAGE="\r\n${scriptname} [-h] [-c <#>] [-l <language> ] [-n]\r\n
 \t\twill report the architecture of the machine, the size of the\r\n
 \t\tdictionary, the number of iterations, bogomips, time per hashing\r\n
 \t\t10Mib characters as normalization\r\n
+\t<nicenumber>\tA number or a number in the format \"1M\" ori\r\n
+\t\t\t\"1Mib\" to represent:\r\n
+\t\t\t   1 M (Mbyte) ${__kbytesvalue["M"]}\r\n
+\t\t\tor 1 Mib (Mbibyte) ${__kbibytesvalue["MIB"]}\r\n
+\t\t\tor 1 Pib (Pbibyte) ${__kbibytesvalue["PIB"]}\r\n
+\t\t\tor other bibyte prefix (e.g., eta or zeta)\r\n
+\r\n
+\t\t\tFor a complete table of nice suffixes and values\r\n
+\t\t\t${scriptname} -v -h\r\n
 \t-c\t<#>\tthe number of copies of the dictionary that are\r\n
 \t\t\tconcatenated together to diminish the open/close processing\r\n
 \t\t\tfor the opening and closing of the input file. The default\r\n
 \t\t\tnumber of copies is ${numcopies}.  Suggested values are\r\n
 \t\t\tbetween 128 and 512 copies.  See also -w below\r\n
-\t-h\tPrint this message\r\n
-\t-l\t<language>\tthe name of an alternate dictionary\r\n
-\t-n\tSend the hash output to /dev/null\r\n
+\t-h\t\tPrint this message\r\n
+\t-l\t\t<language>\tthe name of an alternate dictionary\r\n
+\t-n\t\tSend the hash output to /dev/null\r\n
 \t-s\t<hashprogram>\tSpecify which cryptographic hash\r\n
 \t\t\tprogram to use valid values:\r\n
 \t\t\tb2sum; sha1sum; sha256sum; sha512sum\r\n
+\t\t\tor the special case \"dd\" which helps measure\r\n
+\t\t\tthe file operations (open, read, write)\r\n
+\t\t\twithout the cryptographic processing\r\n
 \t-v\t\tturn on verbose mode, currently ignored\r\n
 \t-w\t<#>\tthe divisor used to provide a \"wait\" time for the \r\n
-\t\t\tcopies operation to complete.  When making (e.g. 512) copies\r\n
-\t\t\tof dictionary that is ~1MB in size, it takes time for that \r\n
-\t\t\toperation to complete so that it does not delay the \"timing\"\r\n
-\t\t\tfunction.  Using the graphical gnome tools that display the\r\n
-\t\t\twrite operations for the system, I have experimented with this\r\n
-\t\t\ton a Raspberry PI 4 and it appears that it takes a divisor value\r\n
-\t\t\tof between 8 and 20.   Your mileage may vary so perform your own\r\n
-\t\t\ttesting.
-\t<nicenumber>\tA number in the format \"1M\" or \"1Mib\" to\r\n
-\t\t\trepresent 1 M (Mbyte) ${__kbytesvalue["M"]}\r\n
-\t\t\tor 1 Mib (Mbibyte) ${__kbibytesvalue["MIB"]}\r\n
-\t\t\tor 1 Pib (Pbibyte) ${__kbibytesvalue["PIB"]}\r\n
-\t\t\tor other bibyte prefix (e.g., eta or zeta)\r\n
-\r\n
-\t\tFor a complete table of nice suffixes and values\r\n
-\t\t${scriptname} -v -h\r\n
+\t\t\tcopies operation to complete.  When making (e.g. 512)\r\n
+\t\t\tcopies tof dictionary that is ~1MB in size, it takes\r\n
+\t\t\ttime for that operation to complete so that it does\r\n
+\t\t\tnot delay the \"timing\" function.  Using the\r\n
+\t\t\tgraphical gnome tools that display the\r\n
+\t\t\twrite operations for the system, I have experimented\r\n
+\t\t\twith this on a Raspberry PI 4 and it appears that it\r\n
+\t\t\ttakes a divisor value of between 8 and 20.   Your\r\n
+\t\t\tmileage may vary so perform your own testing.\r\n
 "
 
 ########################################################################
@@ -167,7 +172,11 @@ do
   s)
     hashprogram="${OPTARG}"
     case ${hashprogram} in
-      b2sum)
+      dd)
+        hashprogram=$(which ${hashprogram})
+        hashprogram=${hashprogram##*/}
+        ;;
+       b2sum)
         hashprogram=$(which ${hashprogram})
         hashprogram=${hashprogram##*/}
         ;;
@@ -248,10 +257,12 @@ iterations=$((iterations / ${numcopies}))
 # dividing the number of total bytes hashed by 1,000,000
 ########################################################################
 TIMER_APP_DEV_NULL=/tmp/mctimer_null$$.sh
+TIMER_APP_DD=/tmp/mctimer_dd$$.sh
 TIMER_APP=/tmp/mctimer$$.sh
 TIMER_OUT=/tmp/mctimeout$$.txt
 TIMER_INPUT=/tmp/mctimein$$
-rm -f ${TIMER_APP} ${TIMER_OUT} ${TIMER_INPUT}
+rm -f ${TIMER_APP} ${TIMER_OUT} ${TIMER_INPUT} ${TIMER_APP_DEV_NULL} \
+  ${TIMER_APP_DEV_NULL}
 
 ########################################################################
 # In order to minimize the overhead for each test, if the copies of the
@@ -307,11 +318,32 @@ do
 done
 exit 0
 EOFNULL
-if [[ "${OUTFILE}" = "/dev/null" ]]
+cat > ${TIMER_APP_DD} <<EOFDD
+#!/bin/bash
+i=0
+while [[ \${i} -lt ${iterations} ]]
+do
+  ${hashprogram} status=none if=${TIMER_INPUT} of=${OUTFILE}
+  i=\$((i+1))
+done
+exit 0
+EOFDD
+
+########################################################################
+# Figure out which timer app we will run and install it as the 
+# app to use.
+########################################################################
+if [[ "${hashprogram}" = "dd" ]]
 then
-  mv ${TIMER_APP_DEV_NULL} ${TIMER_APP}
+  mv ${TIMER_APP_DD} ${TIMER_APP}
 else
-  rm -f ${TIMER_APP_DEV_NULL}
+  rm -f ${TIMER_APP_DD}
+	if [[ "${OUTFILE}" = "/dev/null" ]]
+	then
+	  mv ${TIMER_APP_DEV_NULL} ${TIMER_APP}
+	else
+	  rm -f ${TIMER_APP_DEV_NULL}
+	fi
 fi
 
 ########################################################################
@@ -354,7 +386,6 @@ elapsedseconds=$(toseconds ${elapsedtime})
 # the name of the system architecture so we know we need to rerun this
 # test combination.
 ########################################################################
-cat ${TIMER_OUT}
 if [[ "${timerfailure}" == "TRUE" ]]
 then
   rm -f ${TIMER_APP} ${TIMER_OUT}
@@ -410,9 +441,11 @@ rm -f ${TIMER_APP} ${TIMER_OUT} ${TIMER_INPUT}
 echo -n "Architecture|cores|CPU max MHz|"
 echo -n "MEM Total|MEM Used|MEM Free|"
 echo -n "SWAP Total|SWAP Used|SWAP Free|"
-echo -n "OS|Bogomips|UCT Date|"
-echo -n "Dictionary bytes|Iterations|"
-echo -n "Cryptographic Hash|WallTime|UserTime|Systime|"
+echo -n "OS|Bogomips|UCT Date_time|"
+echo -n "Dictionary bytes|Iterations|Number of Copies|"
+echo -n "Total size|"
+echo -n "Cryptographic Hash|"
+echo -n "WallTime|UserTime|Systime|"
 echo -n "MB/Sec Wall|MB/Sec User|MB/Sec System"
 echo ""
 
@@ -423,7 +456,9 @@ echo -n "${Arch}|${cores}|${maxCPU}|"
 echo -n "${memtotal}|${memused}|${memfree}|"
 echo -n "${swaptotal}|${swapused}|${swapfree}|"
 echo -n "$(func_os)|${bogomips}|${UCTdatetime}|"
-echo -n "${dictsize}|${iterations}|${hashprogram}|"
+echo -n "${dictsize}|${iterations}|${numcopies}|"
+echo -n "${totsize}|"
+echo -n "${hashprogram}|"
 echo -n "${elapsedseconds}|${userseconds}|${systemseconds}|"
 echo -n "${elapsedrate}|${userrate}|${systemrate}"
 echo ""
