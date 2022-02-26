@@ -75,6 +75,9 @@ USAGE="${0##*/} [-h] [-c <#>] [-w <#>] [-d <suffix>] [-f <testname>i] [-n]\r\n
 \t\tof iterations to bump the test count by each time\t\n
 \t-c\t<#>\tThe number of copies of the input file to concatenate\r\n
 \t\t\ttogether to minimize the open/close overhead.\r\n
+\t\t\tNote: the number of copies is appended to the\r\n
+\t\t\tsuffix in order to distinguish both scripts\r\n
+\t\t\tand results.\r\n
 \t-d\t<suffix>\tis the string just prior to the ".csv" extension\r\n
 \t\t\tthat can uniquely identify the generate script.  The \r\n
 \t\t\tdefault is normally the current date time \r\n
