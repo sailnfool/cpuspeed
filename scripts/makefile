@@ -2,8 +2,7 @@ SHELL=/bin/bash
 .sh:
 	@rm -f $@
 	cp $< $@
-INSTALL = cpuspeed_function wrapper_cpuspeed dwrapper_cpuspeed \
-					ddspeed mcspeed mwrapper
+INSTALL = mcspeed mwrapper
 
 EXECDIR := $(HOME)/bin
 
