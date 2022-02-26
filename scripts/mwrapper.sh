@@ -230,6 +230,13 @@ then
 fi
 
 ########################################################################
+# a small cleanup.  During testing I realized that both the shell
+# scripts and the results files needed the numcopies appended to
+# the names to make sure all variants were run.
+########################################################################
+testname="$(hostname)_${suffix}${numcopies}"
+
+########################################################################
 # We want to keep the results in the repository
 ########################################################################
 outdir=$HOME/github/cpuspeed/results
