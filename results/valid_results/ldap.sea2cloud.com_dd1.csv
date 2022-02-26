@@ -1,0 +1,22 @@
+Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date_time|Dictionary bytes|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+x86_64|4|3193.0000|7.8Gi|3.1Gi|287Mi|7.0Gi|22Mi|7.0Gi|ubuntu|6383.70|20220226_1842|976241|1024|1|999670784|dd|4.01|1.25|2.83|249|799|353
+Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date_time|Dictionary bytes|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+x86_64|4|3193.0000|7.8Gi|3.1Gi|270Mi|7.0Gi|22Mi|7.0Gi|ubuntu|6383.70|20220226_1842|976241|5120|1|4998353920|dd|19.56|6.01|13.92|255|831|359
+Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date_time|Dictionary bytes|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+x86_64|4|3193.0000|7.8Gi|3.1Gi|285Mi|7.0Gi|22Mi|7.0Gi|ubuntu|6383.70|20220226_1843|976241|10240|1|9996707840|dd|39.97|12.00|28.77|250|833|347
+Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date_time|Dictionary bytes|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+x86_64|4|3193.0000|7.8Gi|3.1Gi|283Mi|7.0Gi|22Mi|7.0Gi|ubuntu|6383.70|20220226_1844|976241|15360|1|14995061760|dd|60.90|17.96|44.15|246|834|339
+Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date_time|Dictionary bytes|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+x86_64|4|3193.0000|7.8Gi|3.1Gi|283Mi|7.0Gi|22Mi|7.0Gi|ubuntu|6383.70|20220226_1845|976241|20480|1|19993415680|dd|80.31|23.86|58.11|248|837|344
+Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date_time|Dictionary bytes|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+x86_64|4|3193.0000|7.8Gi|3.1Gi|278Mi|7.0Gi|22Mi|7.0Gi|ubuntu|6383.70|20220226_1847|976241|25600|1|24991769600|dd|102.56|29.89|74.70|243|836|334
+Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date_time|Dictionary bytes|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+x86_64|4|3193.0000|7.8Gi|3.1Gi|276Mi|7.0Gi|22Mi|7.0Gi|ubuntu|6383.70|20220226_1849|976241|30720|1|29990123520|dd|120.26|35.65|87.03|249|841|344
+Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date_time|Dictionary bytes|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+x86_64|4|3193.0000|7.8Gi|3.1Gi|275Mi|7.0Gi|22Mi|7.0Gi|ubuntu|6383.70|20220226_1851|976241|35840|1|34988477440|dd|140.38|41.94|101.23|249|834|345
+Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date_time|Dictionary bytes|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+x86_64|4|3193.0000|7.8Gi|3.1Gi|272Mi|7.0Gi|22Mi|7.0Gi|ubuntu|6383.70|20220226_1854|976241|40960|1|39986831360|dd|161.17|47.37|117.17|248|844|341
+Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date_time|Dictionary bytes|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+x86_64|4|3193.0000|7.8Gi|3.1Gi|273Mi|7.0Gi|22Mi|7.0Gi|ubuntu|6383.70|20220226_1857|976241|46080|1|44985185280|dd|182.68|54.02|132.54|246|832|339
+Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|Bogomips|UCT Date_time|Dictionary bytes|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+x86_64|4|3193.0000|7.8Gi|3.1Gi|269Mi|7.0Gi|22Mi|7.0Gi|ubuntu|6383.70|20220226_1900|976241|51200|1|49983539200|dd|203.52|57.89|149.78|245|863|333
