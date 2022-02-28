@@ -34,17 +34,17 @@ source func.regex
 # Declare the list of default hash functions that will be tested
 ########################################################################
 declare -a hashes
-hashes=("b2sum" "sha1sum" "sha256sum" "sha512sum")
+hashes=("b2sum" "sha1sum" "sha256sum" "sha512sum" "dd")
 
 ########################################################################
 # Verify that binaries for each of the hash functions are found on 
 # this machine
 ########################################################################
-for myhash in "${!hashes[@]}"
+for myhash in "${hashes[@]}"
 do
-  if [[ ! $(which ${hashes[${myhash}]}) ]]
+  if [[ ! $(which ${myhash}) ]]
   then
-    errecho "-e" "Cryptographic Hash Function ${hashes[${myhash}]} not found"
+    errecho "-e" "Cryptographic Hash Function ${myhash} not found"
     errecho "-e" "Have you installed the \"coreutils\" package?"
     sudo apt install coreutils
   fi
@@ -140,23 +140,53 @@ do
     case ${hashprogram} in
       dd)
         hashprogram=$(which ${hashprogram})
+        if [[ ! $? ]]
+        then
+          errecho -e "${hashprogram} not found"
+          errecho -e ${USAGE}
+          exit 1
+        fi
         hashprogram=${hashprogram##*/}
-        hashes=("dd")
+        hashes+=("dd")
         ;;
        b2sum)
         hashprogram=$(which ${hashprogram})
+        if [[ ! $? ]]
+        then
+          errecho -e "${hashprogram} not found"
+          errecho -e ${USAGE}
+          exit 1
+        fi
         hashprogram=${hashprogram##*/}
         ;;
       sha1sum)
         hashprogram=$(which ${hashprogram})
+        if [[ ! $? ]]
+        then
+          errecho -e "${hashprogram} not found"
+          errecho -e ${USAGE}
+          exit 1
+        fi
         hashprogram=${hashprogram##*/}
         ;;
       sha256sum)
         hashprogram=$(which ${hashprogram})
+        if [[ ! $? ]]
+        then
+          errecho -e "${hashprogram} not found"
+          errecho -e ${USAGE}
+          exit 1
+        fi
         hashprogram=${hashprogram##*/}
         ;;
       sha512sum)
         hashprogram=$(which ${hashprogram})
+        if [[ ! $? ]]
+        then
+          errecho -e "${hashprogram} not found"
+          errecho -e ${USAGE}
+          exit 1
+        fi
         hashprogram=${hashprogram##*/}
         ;;
       \?)
@@ -237,14 +267,12 @@ fi
 # scripts and the results files needed the numcopies appended to
 # the names to make sure all variants were run.
 ########################################################################
-testname="$(hostname)_${suffix}${numcopies}"
 
 ########################################################################
 # We want to keep the results in the repository
 ########################################################################
 outdir=$HOME/github/cpuspeed/results
 testoutput=${testname}.csv
-scripter=script_${testname}.sh
 outfile=${outdir}/${testoutput}
 max=${maxiterations}
 
@@ -261,10 +289,13 @@ echo "#!/bin/bash" | tee -a ${outdir}/${scripter}
 count=1
 while [[ ${count} -le ${max} ]]
 do
-  for myhash in "${!hashes[@]}"
+  for myhash in "${hashes[@]}"
   do
-    echo "mcspeed -c ${numcopies} -w ${waitdivisor} -n -s ${hashes[${myhash}]} ${count}Kib |" \
-      "tee -a ${outdir}/${testoutput}" | tee -a ${outdir}/${scripter}
+    testname="$(hostname)_${myhash}_${numcopies}"
+    scripter=script_${testname}.sh
+    echo "mcspeed -r \"${outdir}\" -c ${numcopies} \
+      -w ${waitdivisor} -n -s ${myhash} ${count}Kib " \
+      | tee -a ${outdir}/${scripter}
   done
   if [[ "${count}" -eq "1" ]]
   then
