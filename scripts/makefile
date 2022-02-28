@@ -2,7 +2,7 @@ SHELL=/bin/bash
 .sh:
 	@rm -f $@
 	cp $< $@
-INSTALL = mcspeed mwrapper
+INSTALL = mcspeed mwrapper awrapper
 
 EXECDIR := $(HOME)/bin
 
