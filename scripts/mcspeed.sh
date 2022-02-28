@@ -295,13 +295,18 @@ else
   do 
     cat ${dictpath}/${language} >> /tmp/${language}_${numcopies}
   done
-  sleepmessage=$(echo "Sleeping for $((numcopies/waitdivisor)) seconds to allow copy to complete")
-  stderrecho ${sleepmessage}
-  sleep $((numcopies/waitdivisor)) # Observed behavior is that the first time the file is 
+  sleeptime=$((numcopies/waitdivisor))
+  sleepmessage=$(echo "Sleeping for ${sleeptime} seconds to allow copy to complete")
+  # stderrecho ${sleepmessage}
+  if [[ "${sleeptime}" -ne "0" ]]
+  then
+    sleep ${sleeptime}
+          # Observed behavior is that the first time the file is 
           # created it impacts the timing of the program under test
           # for large files, presumably waiting for this write
           # operation to finish. Experiment to find your system
           # quiesce time.
+  fi
   ln /tmp/${language}_${numcopies} ${TIMER_INPUT}
 fi
 
