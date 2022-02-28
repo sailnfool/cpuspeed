@@ -293,6 +293,10 @@ do
   do
     testname="$(hostname)_${myhash}_${numcopies}"
     scripter=script_${testname}.sh
+    if [[ ! -r "${outdir}/${scripter}" ]]
+    then
+      echo "#!/bin/bash" | tee -a ${outdir}/${scripter}
+    fi
     echo "mcspeed -r \"${outdir}\" -c ${numcopies} \
       -w ${waitdivisor} -n -s ${myhash} ${count}Kib " \
       | tee -a ${outdir}/${scripter}
