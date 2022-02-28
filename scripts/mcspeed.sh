@@ -14,6 +14,13 @@ scriptname=${0##*/}
 #_____________________________________________________________________
 # Rev.|Auth.| Date     | Notes
 #_____________________________________________________________________
+# 1.4 | REN |02/28/2022| stripped the system information out of each
+#                      | record and placed it into a separate file that
+#                      | is written only once per host.  Redirected the
+#                      | sleep message to stderr so it won't clutter
+#                      | result files.  If there is a failure in 
+#                      | timing the applications, put the word 
+#                      | FAILURE at the beginning of the record.
 # 1.3 | REN |02/25/2022| concatenate N copies of the dictionary file
 #                      | together before starting to iterate the
 #                      | cryptographic hashes over 1/Nth the number of
@@ -59,10 +66,7 @@ scriptname=${0##*/}
 # commonly found on Linux systems, including:
 # sha1sum, sha256sum, sha512sum, b2sum
 #
-#_____________________________________________________________________
-# Rev.|Auth.| Date     | Notes
-#_____________________________________________________________________
-#
+########################################################################
 source func.nice2num
 source func.errecho
 source func.insufficient
@@ -83,6 +87,7 @@ OUTFILE=/tmp/timer_out$$.txt
 hashprogram=$(which sha256sum)
 timerfailure="FALSE"
 waitdivisor=8
+resultdir=${HOME}/github/cpuspeed/results
 
 USAGE="\r\n${scriptname} [-h] [-c <#>] [-l <language> ] [-n]\r\n
 \t\t\t[-s <hashprogram>] [-w <#>] <nicenumber>\r\n
@@ -108,6 +113,7 @@ USAGE="\r\n${scriptname} [-h] [-c <#>] [-l <language> ] [-n]\r\n
 \t-h\t\tPrint this message\r\n
 \t-l\t\t<language>\tthe name of an alternate dictionary\r\n
 \t-n\t\tSend the hash output to /dev/null\r\n
+\t-r\t<dir>\tthe directory in which results are placed\r\n
 \t-s\t<hashprogram>\tSpecify which cryptographic hash\r\n
 \t\t\tprogram to use valid values:\r\n
 \t\t\tb2sum; sha1sum; sha256sum; sha512sum\r\n
@@ -130,7 +136,7 @@ USAGE="\r\n${scriptname} [-h] [-c <#>] [-l <language> ] [-n]\r\n
 ########################################################################
 # Define all of the optionargs documented in USAGE.
 ########################################################################
-optionargs="c:hl:ns:vw:"
+optionargs="c:hl:nr:s:vw:"
 
 ########################################################################
 # Process the Command Line options based on the Usage above
@@ -168,6 +174,16 @@ do
     ;;
   l)
     language="${OPTARG}"
+    ;;
+  r)
+    if [[ -d "${OPTARG}" ]]
+    then
+      resultdir="${OPTARG}"
+    else
+      errecho -e "-r parameter ${OPTARG} is not a directory"
+      errecho -e ${USAGE}
+      exit 1
+    fi
     ;;
   s)
     hashprogram="${OPTARG}"
@@ -239,6 +255,7 @@ fi
 ########################################################################
 # Convert the nice notation to a number
 ########################################################################
+effiter=${POWER}
 iterations=$(nice2num "${POWER}")
 iterations=$((iterations / ${numcopies}))
 
@@ -278,14 +295,13 @@ else
   do 
     cat ${dictpath}/${language} >> /tmp/${language}_${numcopies}
   done
-  echo "Sleeping for $((numcopies/waitdivisor)) seconds to allow copy to complete"
-  sleep $((numcopies/waitdivisor)) # Observed behavior is that the first time the file is 
+  sleepmessage=$(echo "Sleeping for $((numcopies/waitdivisor)) seconds to allow copy to complete")
+  stderrecho ${sleepmessage}
+  sleep $((numcopies/waitdivisor))# Observed behavior is that the first time the file is 
           # created it impacts the timing of the program under test
           # for large files, presumably waiting for this write
-          # operation to finish. The value of 5 seconds is arbitrary
-          # further testing should be done to make this wait time be
-          # a function of the numcopies.  The formula just added
-          # assumes 5 seconds for 100 copies and scales from there
+          # operation to finish. Experiment to find your system
+          # quiesce time.
   ln /tmp/${language}_${numcopies} ${TIMER_INPUT}
 fi
 
@@ -381,18 +397,6 @@ elapsedseconds=$(toseconds ${elapsedtime})
 # Collect the rest of the system data
 ########################################################################
 
-########################################################################
-# Remembering if the timing was a failure, add the word "FAILURE - " to
-# the name of the system architecture so we know we need to rerun this
-# test combination.
-########################################################################
-if [[ "${timerfailure}" == "TRUE" ]]
-then
-  rm -f ${TIMER_APP} ${TIMER_OUT}
-  Arch="FAILURE - $(uname -m)"
-else
-  Arch=$(uname -m)
-fi
 
 ########################################################################
 # Find out the maximum frequency at which the processors run.  Although
@@ -400,6 +404,8 @@ fi
 # the clock speed of cores that are essentially idle (hence part of
 # the fallacy of using Bogomips as a performance metric).
 ########################################################################
+host=$(hostname)
+Arch=$(uname -m)
 maxCPU=$(lscpu | grep  -i "CPU max MHz" | \
   sed "s/^.*:[^0-9]*\([0-9\.][0-9\.]*\)/\1/")
 cores=$(lscpu | grep -i "^CPU(s)" |
@@ -434,31 +440,56 @@ systemrate=$(echo "( ${totsize} / ${systemseconds} ) / 1000000" | bc)
 rm -f ${TIMER_APP} ${TIMER_OUT} ${TIMER_INPUT}
 
 ########################################################################
+# Remembering if the timing was a failure, add the word "FAILURE - " to
+# the beginning of the result line.
+########################################################################
+if [[ "${timerfailure}" == "TRUE" ]]
+then
+  rm -f ${TIMER_APP} ${TIMER_OUT}
+  echo -n "FAILURE|"
+fi
+
+sysdescription_file=${resultdir}/${host}_description.txt
+resultfile=${resultdir}/${host}.${hashprogram}.${numcopies}.csv
+########################################################################
 # We emit the header line every time.  Although mildly redundant this
 # can be elided either by a spreadsheet application or by using 
 # sort -u to eiliminate the redundant copies
 ########################################################################
-echo -n "Architecture|cores|CPU max MHz|"
-echo -n "MEM Total|MEM Used|MEM Free|"
-echo -n "SWAP Total|SWAP Used|SWAP Free|"
-echo -n "OS|Bogomips|UCT Date_time|"
-echo -n "Dictionary bytes|Iterations|Number of Copies|"
-echo -n "Total size|"
-echo -n "Cryptographic Hash|"
-echo -n "WallTime|UserTime|Systime|"
-echo -n "MB/Sec Wall|MB/Sec User|MB/Sec System"
-echo ""
+if [[ ! -r "${sysdescription_file}" ]]
+then
+	echo -n "Hostname|Architecture|cores|CPU max MHz|" > ${sysdescription_file}
+	echo -n "MEM Total|MEM Used|MEM Free|" >> ${sysdescription_file}
+	echo -n "SWAP Total|SWAP Used|SWAP Free|" >> ${sysdescription_file}
+	echo -n "OS|OS_VERSION_ID|Bogomips" >> ${sysdescription_file}
+	echo "" >> ${sysdescription_file}
+fi
+echo -n "Hostname|UCT Date_time|" >> ${resultfile}
+echo -n "Dictionary bytes|Effective Iterations|" >> ${resultfile}
+echo -n "Iterations|Number of Copies|" >> ${resultfile}
+echo -n "Total size|" >> ${resultfile}
+echo -n "Cryptographic Hash|" >> ${resultfile}
+echo -n "WallTime|UserTime|Systime|" >> ${resultfile}
+echo -n "MB/Sec Wall|MB/Sec User|MB/Sec System" >> ${resultfile}
+echo "" >> ${resultfile}
 
 ########################################################################
 # Emit the actual data for this test.
 ########################################################################
-echo -n "${Arch}|${cores}|${maxCPU}|"
-echo -n "${memtotal}|${memused}|${memfree}|"
-echo -n "${swaptotal}|${swapused}|${swapfree}|"
-echo -n "$(func_os)|${bogomips}|${UCTdatetime}|"
-echo -n "${dictsize}|${iterations}|${numcopies}|"
-echo -n "${totsize}|"
-echo -n "${hashprogram}|"
-echo -n "${elapsedseconds}|${userseconds}|${systemseconds}|"
-echo -n "${elapsedrate}|${userrate}|${systemrate}"
-echo ""
+if [[ ! -r "${sysdescription_file}" ]]
+then
+	echo -n "${host}|${Arch}|${cores}|${maxCPU}|" >> ${sysdescription_file}
+	echo -n "${memtotal}|${memused}|${memfree}|" >> ${sysdescription_file}
+	echo -n "${swaptotal}|${swapused}|${swapfree}|" >> ${sysdescription_file}
+	echo -n "$(func_os)|$(func_os_version_id)|${bogomips}" >> ${sysdescription_file}
+	echo "" >> ${sysdescription_file}
+fi
+echo -n "${host}|${UCTdatetime}|" >> ${resultfile}
+echo -n "${dictsize}|${effiter}|" >> ${resultfile}
+echo -n "${iterations}|${numcopies}|" >> ${resultfile}
+echo -n "${totsize}|" >> ${resultfile}
+echo -n "${hashprogram}|" >> ${resultfile}
+echo -n "${elapsedseconds}|${userseconds}|${systemseconds}|" >> ${resultfile}
+echo -n "${elapsedrate}|${userrate}|${systemrate}" >> ${resultfile}
+echo "" >> ${resultfile}
+tail -1 ${resultfile}
