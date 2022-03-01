@@ -375,7 +375,6 @@ fi
 chmod +x ${TIMER_APP}
 /usr/bin/time ${TIMER_APP} 2> ${TIMER_OUT}
 timeresult=$?
-rm -f ${TIMER_APP}
 
 ########################################################################
 # At this point the test is completed.  Now we gather all of the 
@@ -499,3 +498,5 @@ echo -n "${elapsedseconds}|${userseconds}|${systemseconds}|" >> ${resultfile}
 echo -n "${elapsedrate}|${userrate}|${systemrate}" >> ${resultfile}
 echo "" >> ${resultfile}
 tail -1 ${resultfile}
+rm -f ${TIMER_APP} ${TIMER_OUT} ${TIMER_INPUT} ${TIMER_APP_DEV_NULL} \
+  ${TIMER_APP_DEV_NULL}
