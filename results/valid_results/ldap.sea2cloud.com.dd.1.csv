@@ -1,0 +1,22 @@
+Hostname|UCT Date_time|Dictionary bytes|Effective Iterations|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+ldap.sea2cloud.com|20220228_1420|976241|1Kib|1024|1|999670784|dd|3.97|1.19|2.85|251|840|350
+Hostname|UCT Date_time|Dictionary bytes|Effective Iterations|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+ldap.sea2cloud.com|20220228_1420|976241|5Kib|5120|1|4998353920|dd|20.16|5.89|14.71|247|848|339
+Hostname|UCT Date_time|Dictionary bytes|Effective Iterations|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+ldap.sea2cloud.com|20220228_1421|976241|10Kib|10240|1|9996707840|dd|40.60|11.83|29.61|246|845|337
+Hostname|UCT Date_time|Dictionary bytes|Effective Iterations|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+ldap.sea2cloud.com|20220228_1422|976241|15Kib|15360|1|14995061760|dd|59.78|18.07|42.93|250|829|349
+Hostname|UCT Date_time|Dictionary bytes|Effective Iterations|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+ldap.sea2cloud.com|20220228_1423|976241|20Kib|20480|1|19993415680|dd|80.44|24.07|58.02|248|830|344
+Hostname|UCT Date_time|Dictionary bytes|Effective Iterations|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+ldap.sea2cloud.com|20220228_1425|976241|25Kib|25600|1|24991769600|dd|100.94|29.64|73.47|247|843|340
+Hostname|UCT Date_time|Dictionary bytes|Effective Iterations|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+ldap.sea2cloud.com|20220228_1427|976241|30Kib|30720|1|29990123520|dd|116.49|36.98|81.92|257|810|366
+Hostname|UCT Date_time|Dictionary bytes|Effective Iterations|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+ldap.sea2cloud.com|20220228_1429|976241|35Kib|35840|1|34988477440|dd|138.83|42.71|99.12|252|819|352
+Hostname|UCT Date_time|Dictionary bytes|Effective Iterations|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+ldap.sea2cloud.com|20220228_1432|976241|40Kib|40960|1|39986831360|dd|161.19|47.84|116.68|248|835|342
+Hostname|UCT Date_time|Dictionary bytes|Effective Iterations|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+ldap.sea2cloud.com|20220228_1435|976241|45Kib|46080|1|44985185280|dd|182.35|53.26|132.88|246|844|338
+Hostname|UCT Date_time|Dictionary bytes|Effective Iterations|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+ldap.sea2cloud.com|20220228_1438|976241|50Kib|51200|1|49983539200|dd|200.96|60.62|144.63|248|824|345
