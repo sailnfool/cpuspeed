@@ -461,6 +461,7 @@ resultfile=${resultdir}/${host}.${hashprogram}.${numcopies}.csv
 # can be elided either by a spreadsheet application or by using 
 # sort -u to eiliminate the redundant copies
 ########################################################################
+output_values="FALSE"
 if [[ ! -r "${sysdescription_file}" ]]
 then
 	echo -n "Hostname|Architecture|cores|CPU max MHz|" > ${sysdescription_file}
@@ -468,6 +469,7 @@ then
 	echo -n "SWAP Total|SWAP Used|SWAP Free|" >> ${sysdescription_file}
 	echo -n "OS|OS_VERSION_ID|Bogomips" >> ${sysdescription_file}
 	echo "" >> ${sysdescription_file}
+  output_values="TRUE"
 fi
 echo -n "Hostname|UCT Date_time|" >> ${resultfile}
 echo -n "Dictionary bytes|Effective Iterations|" >> ${resultfile}
@@ -481,7 +483,7 @@ echo "" >> ${resultfile}
 ########################################################################
 # Emit the actual data for this test.
 ########################################################################
-if [[ ! -r "${sysdescription_file}" ]]
+if [[ "${output_values}" = "TRUE" ]]
 then
 	echo -n "${host}|${Arch}|${cores}|${maxCPU}|" >> ${sysdescription_file}
 	echo -n "${memtotal}|${memused}|${memfree}|" >> ${sysdescription_file}
