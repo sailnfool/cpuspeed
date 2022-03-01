@@ -375,6 +375,7 @@ fi
 chmod +x ${TIMER_APP}
 /usr/bin/time ${TIMER_APP} 2> ${TIMER_OUT}
 timeresult=$?
+rm -f ${TIMER_APP}
 
 ########################################################################
 # At this point the test is completed.  Now we gather all of the 
