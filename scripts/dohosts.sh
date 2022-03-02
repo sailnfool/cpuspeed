@@ -14,8 +14,10 @@ do
   bash -x \${script}
 done
 EOF
-for i in optiplex980 inspiron3185 lr br pi3
-do
-  echo Working on $i
-  ssh ${USER}@$i 'bash -s -x' /tmp/doscripts.sh
-done
+# for i in optiplex980 inspiron3185 lr br pi3
+# do
+#   echo Working on $i
+#   ssh ${USER}@$i 'bash -s -x' /tmp/doscripts.sh
+# done
+bash -x /tmp/doscripts.sh
+
