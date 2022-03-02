@@ -22,8 +22,8 @@ source func.errecho
 
 if [[ $(which mwrapper) ]]
 then
-  mwrapper -c 512 50 5
-  mwrapper -c 1 50 5
+  mwrapper -c 512 15 5
+  mwrapper -c 1 15 5
 else
   errecho -e "cannot find mwrapper.  Did you run make install?"
 fi
