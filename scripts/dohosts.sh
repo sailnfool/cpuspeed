@@ -1,11 +1,11 @@
 #!/bin/bash
 cat > /tmp/doscripts.sh << EOF
 #!/bin/bash
-cd github/cpuspeed
+cd ~rnovak/github/cpuspeed
 git pull
 sleep 3
 make
-cd results
+cd ~rnovak/github/cpuspeed/results
 git rm * verified_results/* working_scripts/*
 mkdir verified_results working_scripts
 awrapper
