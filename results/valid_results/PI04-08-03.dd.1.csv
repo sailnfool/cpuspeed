@@ -1,22 +1,8 @@
 Hostname|UCT Date_time|Dictionary bytes|Effective Iterations|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
-PI04-08-03|20220228_1519|976241|1Kib|1024|1|999670784|dd|20.15|4.56|15.79|49|219|63
+PI04-08-03|20220302_0732|976241|1Kib|1024|1|999670784|dd|19.91|4.30|15.78|50|232|63
 Hostname|UCT Date_time|Dictionary bytes|Effective Iterations|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
-PI04-08-03|20220228_1521|976241|5Kib|5120|1|4998353920|dd|100.51|21.91|79.72|49|228|62
+PI04-08-03|20220302_0734|976241|5Kib|5120|1|4998353920|dd|99.54|21.69|78.88|50|230|63
 Hostname|UCT Date_time|Dictionary bytes|Effective Iterations|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
-PI04-08-03|20220228_1524|976241|10Kib|10240|1|9996707840|dd|200.62|44.46|158.39|49|224|63
+PI04-08-03|20220302_0737|976241|10Kib|10240|1|9996707840|dd|198.64|44.68|156.16|50|223|64
 Hostname|UCT Date_time|Dictionary bytes|Effective Iterations|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
-PI04-08-03|20220228_1529|976241|15Kib|15360|1|14995061760|dd|300.75|66.00|237.92|49|227|63
-Hostname|UCT Date_time|Dictionary bytes|Effective Iterations|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
-PI04-08-03|20220228_1536|976241|20Kib|20480|1|19993415680|dd|403.64|87.96|320.10|49|227|62
-Hostname|UCT Date_time|Dictionary bytes|Effective Iterations|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
-PI04-08-03|20220228_1545|976241|25Kib|25600|1|24991769600|dd|502.12|110.01|397.32|49|227|62
-Hostname|UCT Date_time|Dictionary bytes|Effective Iterations|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
-PI04-08-03|20220228_1555|976241|30Kib|30720|1|29990123520|dd|604.78|133.55|477.30|49|224|62
-Hostname|UCT Date_time|Dictionary bytes|Effective Iterations|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
-PI04-08-03|20220228_1606|976241|35Kib|35840|1|34988477440|dd|703.10|154.60|556.20|49|226|62
-Hostname|UCT Date_time|Dictionary bytes|Effective Iterations|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
-PI04-08-03|20220228_1620|976241|40Kib|40960|1|39986831360|dd|802.97|176.23|635.52|49|226|62
-Hostname|UCT Date_time|Dictionary bytes|Effective Iterations|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
-PI04-08-03|20220228_1635|976241|45Kib|46080|1|44985185280|dd|904.42|197.06|716.68|49|228|62
-Hostname|UCT Date_time|Dictionary bytes|Effective Iterations|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
-PI04-08-03|20220228_1652|976241|50Kib|51200|1|49983539200|dd|1004.66|220.16|795.01|49|227|62
+PI04-08-03|20220302_0742|976241|15Kib|15360|1|14995061760|dd|298.20|65.91|235.45|50|227|63
