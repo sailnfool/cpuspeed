@@ -6,8 +6,8 @@ git pull
 sleep 3
 make
 cd ~rnovak/github/cpuspeed/results
-git rm * verified_results/* working_scripts/*
-mkdir verified_results working_scripts
+rm *.csv *.txt *.sh
+mkdir valid_results working_scripts
 awrapper
 for script in script*.sh
 do
