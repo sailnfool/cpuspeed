@@ -1,0 +1,8 @@
+Hostname|UCT Date_time|Dictionary bytes|Effective Iterations|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+Inspiron3185|20220302_0433|976241|1Kib|2|512|999670784|sha256sum|8.88|8.55|0.33|112|116|3029
+Hostname|UCT Date_time|Dictionary bytes|Effective Iterations|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+Inspiron3185|20220302_0434|976241|5Kib|10|512|4998353920|sha256sum|44.42|43.13|1.28|112|115|3904
+Hostname|UCT Date_time|Dictionary bytes|Effective Iterations|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+Inspiron3185|20220302_0435|976241|10Kib|20|512|9996707840|sha256sum|88.85|86.04|2.78|112|116|3595
+Hostname|UCT Date_time|Dictionary bytes|Effective Iterations|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|MB/Sec Wall|MB/Sec User|MB/Sec System
+Inspiron3185|20220302_0437|976241|15Kib|30|512|14995061760|sha256sum|133.23|129.31|3.90|112|115|3844

@@ -1,0 +1,2 @@
+Hostname|Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|OS_VERSION_ID|Bogomips
+Inspiron3185|x86_64|2|1800.0000|7.2Gi|640Mi|4.6Gi|6.5Gi|0B|6.5Gi|ubuntu|"21.10"|3593.00
