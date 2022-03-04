@@ -455,8 +455,8 @@ then
 fi
 
 descrip_file=${resultdir}/${host}_description.txt
-resultfile=${resultdir}/${host}.${hashprogram}.${numcopies}.csv
-dbfile=${resultdir}/DB_${host}.${hashprogram}.${numcopies}.csv
+resultfile=${resultdir}/${host}.${hashprogram}.csv
+dbfile=${resultdir}/DB_${host}.${hashprogram}.csv
 
 ########################################################################
 # If we haven't done so, then we emit a description file which
@@ -502,7 +502,7 @@ fi
 ########################################################################
 # We are attempting to output a header file only once in the results
 ########################################################################
-if [[ ! $(grep '^Hostname' "${resultfile}") ]]
+if [[ ! -r "${resultfile}" ]]
 then
 	echo -n "Hostname|UCT Date_time|" >> ${resultfile}
 	echo -n "Dictionary bytes|Effective Iterations|" >> ${resultfile}
