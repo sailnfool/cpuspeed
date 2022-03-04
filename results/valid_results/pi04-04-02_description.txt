@@ -1,0 +1,2 @@
+Hostname|Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|OS_VERSION_ID|Bogomips
+pi04-04-02|aarch64|4|1500.0000|3.7Gi|2.7Gi|135Mi|3.3Gi|1.6Gi|1.8Gi|ubuntu|"21.10"|108.00
