@@ -393,7 +393,7 @@ usertime=$(cat ${TIMER_OUT} | \
 userseconds=$(toseconds ${usertime})
 systemtime=$(cat ${TIMER_OUT} | \
   sed -e '2d' -e '1,1s/^.*user \([0-9:\.][0-9:\.]*\)system.*$/\1/') 
-systemseconds=$(toseconds ${systemtime})
+sysseconds=$(toseconds ${systemtime})
 elapsedtime=$(cat ${TIMER_OUT} | \
   sed -e '2d' -e '1,1s/^.*system \([0-9:\.][0-9:\.]*\)elapsed.*$/\1/')
 elapsedseconds=$(toseconds ${elapsedtime})
@@ -439,7 +439,7 @@ dictsize=$(stat --printf="%s" /usr/share/dict/${language})
 totsize=$(echo "${dictsize} * ${iterations} * ${numcopies}" | bc)
 elapsedrate=$(echo "( ${totsize} / ${elapsedseconds} ) / 1000000" | bc)
 userrate=$(echo "( ${totsize} / ${userseconds} ) / 1000000" | bc)
-systemrate=$(echo "( ${totsize} / ${systemseconds} ) / 1000000" | bc)
+systemrate=$(echo "( ${totsize} / ${sysseconds} ) / 1000000" | bc)
 
 ########################################################################
 rm -f ${TIMER_APP} ${TIMER_OUT} ${TIMER_INPUT}
@@ -484,26 +484,26 @@ if [[ ! -r "${dbfile}" ]]
 then
   echo -n "Lookup Value|" >> ${dbfile}
   echo -n "MB/Sec Wall|MB/Sec User|MB/Sec System" >> ${dbfile}
-  echo -n "" >> ${dbfile}
+  echo "" >> ${dbfile}
 else
 
   ######################################################################
   # We should never succeed in this test. This else clause could
   # probably be elided.
   ######################################################################
-  if [[ ! $(grep '^Lookup' ${dbfile} ]]
+  if [[ ! $(grep '^Lookup' "${dbfile}") ]]
   then
 	  echo -n "Lookup Value|" >> ${dbfile}
 	  echo -n "MB/Sec Wall|MB/Sec User|MB/Sec System" >> ${dbfile}
-	  echo -n "" >> ${dbfile}
+	  echo "" >> ${dbfile}
   fi
 fi
 
 ########################################################################
 # We are attempting to output a header file only once in the results
 ########################################################################
-if [[ ! $(grep '^Hostname' ${resultfil}) ]]
-then`
+if [[ ! $(grep '^Hostname' "${resultfile}") ]]
+then
 	echo -n "Hostname|UCT Date_time|" >> ${resultfile}
 	echo -n "Dictionary bytes|Effective Iterations|" >> ${resultfile}
 	echo -n "Iterations|Number of Copies|" >> ${resultfile}
@@ -524,15 +524,15 @@ then
 	echo -n "$(func_os)|$(func_os_version_id)|${bogomips}" >> ${descrip_file}
 	echo "" >> ${descrip_file}
 fi
-echo -n "${host}_${hashprogram}_${numcopies}_${effiter}|" >> ${dbfile}
+echo -n "${host}_${hashprogram}_${numcopies}_$(nice2num ${effiter})|" >> ${dbfile}
 echo -n "${elapsedrate}|${userrate}|${systemrate}" >> ${dbfile}
-echo -n "" >> ${dbfile}
+echo "" >> ${dbfile}
 echo -n "${host}|${UCTdatetime}|" >> ${resultfile}
 echo -n "${dictsize}|${effiter}|" >> ${resultfile}
 echo -n "${iterations}|${numcopies}|" >> ${resultfile}
 echo -n "${totsize}|" >> ${resultfile}
 echo -n "${hashprogram}|" >> ${resultfile}
-echo -n "${elapsedseconds}|${userseconds}|${systemseconds}|" >> ${resultfile}
+echo -n "${elapsedseconds}|${userseconds}|${sysseconds}|" >> ${resultfile}
 echo -n "${elapsedrate}|${userrate}|${systemrate}" >> ${resultfile}
 echo "" >> ${resultfile}
 tail -1 ${resultfile}
