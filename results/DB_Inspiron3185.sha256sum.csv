@@ -1,9 +1,0 @@
-Lookup Value|MB/Sec Wall|MB/Sec User|MB/Sec System
-Inspiron3185_sha256sum_512_1024|112|115|3998
-Inspiron3185_sha256sum_512_5120|112|116|3675
-Inspiron3185_sha256sum_512_10240|114|117|3966
-Inspiron3185_sha256sum_512_15360|116|120|3864
-Inspiron3185_sha256sum_1_1024|94|111|624
-Inspiron3185_sha256sum_1_5120|95|111|631
-Inspiron3185_sha256sum_1_10240|95|111|612
-Inspiron3185_sha256sum_1_15360|95|111|611

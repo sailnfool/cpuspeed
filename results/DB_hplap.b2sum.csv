@@ -1,9 +1,9 @@
 Lookup Value|MB/Sec Wall|MB/Sec User|MB/Sec System
-hplap_b2sum_512_1024|133|145|1612
-hplap_b2sum_512_5120|312|340|3730
-hplap_b2sum_512_10240|306|334|3716
-hplap_b2sum_512_15360|220|238|2850
-hplap_b2sum_1_1024|94|127|343
-hplap_b2sum_1_5120|90|124|315
-hplap_b2sum_1_10240|90|123|321
+hplap_b2sum_512_1024|313|341|3998
+hplap_b2sum_512_5120|312|342|3544
+hplap_b2sum_512_10240|302|329|3595
+hplap_b2sum_512_15360|214|230|2957
+hplap_b2sum_1_1024|109|152|364
+hplap_b2sum_1_5120|90|124|311
+hplap_b2sum_1_10240|90|124|312
 hplap_b2sum_1_15360|90|124|316
