@@ -285,6 +285,27 @@ max=${maxiterations}
 # placing in a file to be executed later.
 ########################################################################
 rm -f ${outfile} ${outdir}/sorted.${testoutput}
+
+########################################################################
+# The following kludge is to eliminate any old scriptfiles laying
+# around for this particular test.
+########################################################################
+count=1
+while [[ ${count} -le ${max} ]]
+do
+  for myhash in "${hashes[@]}"
+  do
+    testname="$(hostname)_${myhash}_${numcopies}"
+    scriptfile=script_${testname}.sh
+    rm -f ${outdir}/${scriptfile}
+  done
+  if [[ "${count}" -eq "1" ]]
+  then
+    count=$((count+(iterincrement-1)))
+  else
+    count=$((count+iterincrement))
+  fi
+done
 count=1
 while [[ ${count} -le ${max} ]]
 do
@@ -295,6 +316,7 @@ do
     if [[ ! -r "${outdir}/${scriptfile}" ]]
     then
       echo "#!/bin/bash" | tee -a ${outdir}/${scriptfile}
+      echo "# ${outdir}/${scriptfile}" | tee -a ${outdir}/${scriptfile}
     fi
     echo "mcspeed -r \"${outdir}\" -c ${numcopies} \
       -w ${waitdivisor} -n -s ${myhash} ${count}Kib " \
