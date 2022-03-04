@@ -1,0 +1,2 @@
+Hostname|Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|OS_VERSION_ID|Bogomips
+hplap|x86_64|4|2000.0000|4.7Gi|708Mi|2.7Gi|4.3Gi|0B|4.3Gi|ubuntu|"21.10"|3992.77

@@ -1,0 +1,9 @@
+Lookup Value|MB/Sec Wall|MB/Sec User|MB/Sec System
+hplap_dd_512_1024|256|1098|337
+hplap_dd_512_5120|267|1149|349
+hplap_dd_512_10240|216|964|278
+hplap_dd_512_15360|178|775|231
+hplap_dd_1_1024|99|408|130
+hplap_dd_1_5120|97|426|123
+hplap_dd_1_10240|87|378|112
+hplap_dd_1_15360|86|363|110

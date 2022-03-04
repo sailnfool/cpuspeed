@@ -1,0 +1,9 @@
+Lookup Value|MB/Sec Wall|MB/Sec User|MB/Sec System
+hplap_sha1sum_512_1024|199|212|3702
+hplap_sha1sum_512_5120|191|200|4063
+hplap_sha1sum_512_10240|134|140|3047
+hplap_sha1sum_512_15360|124|130|2818
+hplap_sha1sum_1_1024|65|81|319
+hplap_sha1sum_1_5120|65|81|315
+hplap_sha1sum_1_10240|66|82|318
+hplap_sha1sum_1_15360|66|82|318
