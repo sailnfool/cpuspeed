@@ -456,12 +456,14 @@ fi
 
 sysdescription_file=${resultdir}/${host}_description.txt
 resultfile=${resultdir}/${host}.${hashprogram}.${numcopies}.csv
+dbfile=${resultdir}/DB_${host}.${hashprogram}.${numcopies}.csv
 ########################################################################
 # We emit the header line every time.  Although mildly redundant this
 # can be elided either by a spreadsheet application or by using 
 # sort -u to eiliminate the redundant copies
 ########################################################################
 output_values="FALSE"
+output_db="FALSE"
 if [[ ! -r "${sysdescription_file}" ]]
 then
 	echo -n "Hostname|Architecture|cores|CPU max MHz|" > ${sysdescription_file}
@@ -471,13 +473,19 @@ then
 	echo "" >> ${sysdescription_file}
   output_values="TRUE"
 fi
+if [[ -r "${dbfile}" ]]
+then
+  echo -n "Lookup Value|" >> ${dbfile}
+  echo -n "MB/Sec Wall|MB/Sec User|MB/Sec System" >> ${dbfile}
+  echo -n "" >> ${dbfile}
+  output_db="TRUE"
+fi
 echo -n "Hostname|UCT Date_time|" >> ${resultfile}
 echo -n "Dictionary bytes|Effective Iterations|" >> ${resultfile}
 echo -n "Iterations|Number of Copies|" >> ${resultfile}
 echo -n "Total size|" >> ${resultfile}
 echo -n "Cryptographic Hash|" >> ${resultfile}
 echo -n "WallTime|UserTime|Systime|" >> ${resultfile}
-echo -n "MB/Sec Wall|MB/Sec User|MB/Sec System" >> ${resultfile}
 echo "" >> ${resultfile}
 
 ########################################################################
@@ -490,6 +498,12 @@ then
 	echo -n "${swaptotal}|${swapused}|${swapfree}|" >> ${sysdescription_file}
 	echo -n "$(func_os)|$(func_os_version_id)|${bogomips}" >> ${sysdescription_file}
 	echo "" >> ${sysdescription_file}
+fi
+if [[ "${output_db}" = "TRUE" ]]
+then
+  echo -n "${host}_${hashprogram}_${numcopies}_${effiter}|"
+  echo -n "${elapsedrate}|${userrate}|${systemrate}" >> ${dbfile}
+  echo -n "" >> ${dbfile}
 fi
 echo -n "${host}|${UCTdatetime}|" >> ${resultfile}
 echo -n "${dictsize}|${effiter}|" >> ${resultfile}
