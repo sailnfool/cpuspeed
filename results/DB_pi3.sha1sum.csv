@@ -1,0 +1,9 @@
+Lookup Value|MB/Sec Wall|MB/Sec User|MB/Sec System
+pi3_sha1sum_512_1024|109|120|1265
+pi3_sha1sum_512_5120|110|120|1281
+pi3_sha1sum_512_10240|110|120|1249
+pi3_sha1sum_512_15360|110|120|1260
+pi3_sha1sum_1_1024|71|102|224
+pi3_sha1sum_1_5120|71|103|220
+pi3_sha1sum_1_10240|71|103|220
+pi3_sha1sum_1_15360|71|103|221
