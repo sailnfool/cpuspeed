@@ -1,2 +1,2 @@
 Hostname|Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|OS_VERSION_ID|Bogomips
-pi3|aarch64|4|1200.0000|909Mi|493Mi|59Mi|818Mi|72Mi|746Mi|debian|"11"|38.40
+pi3|aarch64|4|1200.0000|909Mi|306Mi|95Mi|818Mi|376Mi|442Mi|debian|"11"|38.40
