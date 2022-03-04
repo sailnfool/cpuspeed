@@ -454,57 +454,79 @@ then
   echo -n "FAILURE|"
 fi
 
-sysdescription_file=${resultdir}/${host}_description.txt
+descrip_file=${resultdir}/${host}_description.txt
 resultfile=${resultdir}/${host}.${hashprogram}.${numcopies}.csv
 dbfile=${resultdir}/DB_${host}.${hashprogram}.${numcopies}.csv
+
 ########################################################################
-# We emit the header line every time.  Although mildly redundant this
-# can be elided either by a spreadsheet application or by using 
-# sort -u to eiliminate the redundant copies
+# If we haven't done so, then we emit a description file which
+# contains the descriptive information about the system on which
+# we run the tests.  This file only requires one header line and
+# one data line of the descriptive data
 ########################################################################
 output_values="FALSE"
-output_db="FALSE"
-if [[ ! -r "${sysdescription_file}" ]]
+if [[ ! -r "${descrip_file}" ]]
 then
-	echo -n "Hostname|Architecture|cores|CPU max MHz|" > ${sysdescription_file}
-	echo -n "MEM Total|MEM Used|MEM Free|" >> ${sysdescription_file}
-	echo -n "SWAP Total|SWAP Used|SWAP Free|" >> ${sysdescription_file}
-	echo -n "OS|OS_VERSION_ID|Bogomips" >> ${sysdescription_file}
-	echo "" >> ${sysdescription_file}
+	echo -n "Hostname|Architecture|cores|CPU max MHz|" > ${descrip_file}
+	echo -n "MEM Total|MEM Used|MEM Free|" >> ${descrip_file}
+	echo -n "SWAP Total|SWAP Used|SWAP Free|" >> ${descrip_file}
+	echo -n "OS|OS_VERSION_ID|Bogomips" >> ${descrip_file}
+	echo "" >> ${descrip_file}
   output_values="TRUE"
 fi
-if [[ -r "${dbfile}" ]]
+
+########################################################################
+# We are going to emit a DB_... file which will contain the data
+# needed for generating charts.  This is a subset of the data.
+# We are careful to emit the header line only once.
+########################################################################
+if [[ ! -r "${dbfile}" ]]
 then
   echo -n "Lookup Value|" >> ${dbfile}
   echo -n "MB/Sec Wall|MB/Sec User|MB/Sec System" >> ${dbfile}
   echo -n "" >> ${dbfile}
-  output_db="TRUE"
+else
+
+  ######################################################################
+  # We should never succeed in this test. This else clause could
+  # probably be elided.
+  ######################################################################
+  if [[ ! $(grep '^Lookup' ${dbfile} ]]
+  then
+	  echo -n "Lookup Value|" >> ${dbfile}
+	  echo -n "MB/Sec Wall|MB/Sec User|MB/Sec System" >> ${dbfile}
+	  echo -n "" >> ${dbfile}
+  fi
 fi
-echo -n "Hostname|UCT Date_time|" >> ${resultfile}
-echo -n "Dictionary bytes|Effective Iterations|" >> ${resultfile}
-echo -n "Iterations|Number of Copies|" >> ${resultfile}
-echo -n "Total size|" >> ${resultfile}
-echo -n "Cryptographic Hash|" >> ${resultfile}
-echo -n "WallTime|UserTime|Systime|" >> ${resultfile}
-echo "" >> ${resultfile}
+
+########################################################################
+# We are attempting to output a header file only once in the results
+########################################################################
+if [[ ! $(grep '^Hostname' ${resultfil}) ]]
+then`
+	echo -n "Hostname|UCT Date_time|" >> ${resultfile}
+	echo -n "Dictionary bytes|Effective Iterations|" >> ${resultfile}
+	echo -n "Iterations|Number of Copies|" >> ${resultfile}
+	echo -n "Total size|" >> ${resultfile}
+	echo -n "Cryptographic Hash|" >> ${resultfile}
+	echo -n "WallTime|UserTime|Systime|" >> ${resultfile}
+	echo "" >> ${resultfile}
+fi
 
 ########################################################################
 # Emit the actual data for this test.
 ########################################################################
 if [[ "${output_values}" = "TRUE" ]]
 then
-	echo -n "${host}|${Arch}|${cores}|${maxCPU}|" >> ${sysdescription_file}
-	echo -n "${memtotal}|${memused}|${memfree}|" >> ${sysdescription_file}
-	echo -n "${swaptotal}|${swapused}|${swapfree}|" >> ${sysdescription_file}
-	echo -n "$(func_os)|$(func_os_version_id)|${bogomips}" >> ${sysdescription_file}
-	echo "" >> ${sysdescription_file}
+	echo -n "${host}|${Arch}|${cores}|${maxCPU}|" >> ${descrip_file}
+	echo -n "${memtotal}|${memused}|${memfree}|" >> ${descrip_file}
+	echo -n "${swaptotal}|${swapused}|${swapfree}|" >> ${descrip_file}
+	echo -n "$(func_os)|$(func_os_version_id)|${bogomips}" >> ${descrip_file}
+	echo "" >> ${descrip_file}
 fi
-if [[ "${output_db}" = "TRUE" ]]
-then
-  echo -n "${host}_${hashprogram}_${numcopies}_${effiter}|"
-  echo -n "${elapsedrate}|${userrate}|${systemrate}" >> ${dbfile}
-  echo -n "" >> ${dbfile}
-fi
+echo -n "${host}_${hashprogram}_${numcopies}_${effiter}|" >> ${dbfile}
+echo -n "${elapsedrate}|${userrate}|${systemrate}" >> ${dbfile}
+echo -n "" >> ${dbfile}
 echo -n "${host}|${UCTdatetime}|" >> ${resultfile}
 echo -n "${dictsize}|${effiter}|" >> ${resultfile}
 echo -n "${iterations}|${numcopies}|" >> ${resultfile}
