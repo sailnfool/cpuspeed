@@ -1,5 +1,6 @@
 #!/bin/bash
-cat > /tmp/doscripts.sh << EOF
+scriptfile=/tmp/doscripts_$$.sh
+cat > ${scriptfile} << EOF
 #!/bin/bash
 cd ~rnovak/github/cpuspeed
 git pull
@@ -14,10 +15,11 @@ do
   bash -x \${script}
 done
 EOF
-# for i in optiplex980 inspiron3185 lr br pi3
+# for i in optiplex980 inspiron3185 hplap lr br pi3
 # do
 #   echo Working on $i
-#   ssh ${USER}@$i 'bash -s -x' /tmp/doscripts.sh
+#   ssh ${USER}@$i 'bash -s -x' ${scriptfile} &
 # done
-bash -x /tmp/doscripts.sh
+bash -x ${scriptfile}
+rm -f ${scriptfile}
 
