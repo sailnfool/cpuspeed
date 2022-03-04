@@ -1,5 +1,5 @@
 #!/bin/bash
-# /home/rnovak/github/cpuspeed/results/script_hplap_sha256sum.sh
+# /home/rnovak/github/cpuspeed/results/script_pi3_sha256sum.sh
 mcspeed -r "/home/rnovak/github/cpuspeed/results" -c 512       -w 8 -n -s sha256sum 1Kib 
 mcspeed -r "/home/rnovak/github/cpuspeed/results" -c 512       -w 8 -n -s sha256sum 5Kib 
 mcspeed -r "/home/rnovak/github/cpuspeed/results" -c 512       -w 8 -n -s sha256sum 10Kib 
