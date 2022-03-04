@@ -295,23 +295,7 @@ while [[ ${count} -le ${max} ]]
 do
   for myhash in "${hashes[@]}"
   do
-    testname="$(hostname)_${myhash}_${numcopies}"
-    scriptfile=script_${testname}.sh
-    rm -f ${outdir}/${scriptfile}
-  done
-  if [[ "${count}" -eq "1" ]]
-  then
-    count=$((count+(iterincrement-1)))
-  else
-    count=$((count+iterincrement))
-  fi
-done
-count=1
-while [[ ${count} -le ${max} ]]
-do
-  for myhash in "${hashes[@]}"
-  do
-    testname="$(hostname)_${myhash}_${numcopies}"
+    testname="$(hostname)_${myhash}"
     scriptfile=script_${testname}.sh
     if [[ ! -r "${outdir}/${scriptfile}" ]]
     then
