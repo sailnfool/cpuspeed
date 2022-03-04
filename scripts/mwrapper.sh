@@ -284,22 +284,21 @@ max=${maxiterations}
 # The output of this command is suitable for piping into bash or for
 # placing in a file to be executed later.
 ########################################################################
-rm -f ${outdir}/${scripter} ${outfile} ${outdir}/sorted.${testoutput}
-echo "#!/bin/bash" | tee -a ${outdir}/${scripter}
+rm -f ${outfile} ${outdir}/sorted.${testoutput}
 count=1
 while [[ ${count} -le ${max} ]]
 do
   for myhash in "${hashes[@]}"
   do
     testname="$(hostname)_${myhash}_${numcopies}"
-    scripter=script_${testname}.sh
-    if [[ ! -r "${outdir}/${scripter}" ]]
+    scriptfile=script_${testname}.sh
+    if [[ ! -r "${outdir}/${scriptfile}" ]]
     then
-      echo "#!/bin/bash" | tee -a ${outdir}/${scripter}
+      echo "#!/bin/bash" | tee -a ${outdir}/${scriptfile}
     fi
     echo "mcspeed -r \"${outdir}\" -c ${numcopies} \
       -w ${waitdivisor} -n -s ${myhash} ${count}Kib " \
-      | tee -a ${outdir}/${scripter}
+      | tee -a ${outdir}/${scriptfile}
   done
   if [[ "${count}" -eq "1" ]]
   then
