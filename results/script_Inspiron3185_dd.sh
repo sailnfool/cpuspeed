@@ -1,5 +1,5 @@
 #!/bin/bash
-# /home/rnovak/github/cpuspeed/results/script_opti.sea2cloud.com_dd.sh
+# /home/rnovak/github/cpuspeed/results/script_Inspiron3185_dd.sh
 mcspeed -r "/home/rnovak/github/cpuspeed/results" -c 512       -w 8 -n -s dd 1Kib 
 mcspeed -r "/home/rnovak/github/cpuspeed/results" -c 512       -w 8 -n -s dd 5Kib 
 mcspeed -r "/home/rnovak/github/cpuspeed/results" -c 512       -w 8 -n -s dd 10Kib 

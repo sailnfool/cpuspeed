@@ -1,0 +1,9 @@
+Lookup Value|MB/Sec Wall|MB/Sec User|MB/Sec System
+Inspiron3185_dd_512_1024|387|1407|555
+Inspiron3185_dd_512_5120|403|1510|551
+Inspiron3185_dd_512_10240|402|1448|558
+Inspiron3185_dd_512_15360|401|1406|562
+Inspiron3185_dd_1_1024|254|768|370
+Inspiron3185_dd_1_5120|254|787|368
+Inspiron3185_dd_1_10240|253|786|365
+Inspiron3185_dd_1_15360|251|790|361

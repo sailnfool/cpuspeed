@@ -1,9 +1,0 @@
-Lookup Value|MB/Sec Wall|MB/Sec User|MB/Sec System
-opti.sea2cloud.com_b2sum_512_1024|558|620|5553
-opti.sea2cloud.com_b2sum_512_5120|573|648|5152
-opti.sea2cloud.com_b2sum_512_10240|571|649|4900
-opti.sea2cloud.com_b2sum_512_15360|577|652|5048
-opti.sea2cloud.com_b2sum_1_1024|295|418|970
-opti.sea2cloud.com_b2sum_1_5120|297|404|1058
-opti.sea2cloud.com_b2sum_1_10240|297|404|1061
-opti.sea2cloud.com_b2sum_1_15360|296|405|1047

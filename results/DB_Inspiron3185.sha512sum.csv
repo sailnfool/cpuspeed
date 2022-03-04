@@ -1,0 +1,9 @@
+Lookup Value|MB/Sec Wall|MB/Sec User|MB/Sec System
+Inspiron3185_sha512sum_512_1024|173|182|4165
+Inspiron3185_sha512sum_512_5120|172|180|3998
+Inspiron3185_sha512sum_512_10240|172|180|3998
+Inspiron3185_sha512sum_512_15360|172|179|4176
+Inspiron3185_sha512sum_1_1024|129|164|581
+Inspiron3185_sha512sum_1_5120|129|162|592
+Inspiron3185_sha512sum_1_10240|128|164|565
+Inspiron3185_sha512sum_1_15360|128|162|580
