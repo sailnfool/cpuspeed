@@ -15,9 +15,15 @@ scriptname=${0##*/}
 #_____________________________________________________________________
 # Rev.|Auth.| Date     | Notes
 #_____________________________________________________________________
+# 1.1 | REN |03/05/2022| Added command line options for -h and -o
+#                      | the -o to eliminate the script do1host and
+#                      | execute only on the current host. Also made
+#                      | the execution on the currrent host a
+#                      | task to survive an ssh disconnect and can
+#                      | resume monitoring by tail -f of the log file
 # 1.0 | REN |03/04/2022| Initial Release
 #_____________________________________________________________________
-#
+#########################################################################
 scriptfile=/tmp/doscripts_$$.sh
 declare -a hostnames
 
@@ -134,5 +140,6 @@ done
 ########################################################################
 # Now execute the script locally
 ########################################################################
-bash -x ${scriptfile}
+bash -x ${scriptfile} &
+tail -f /tmp/$(hostname)_log_$$.txt
 
