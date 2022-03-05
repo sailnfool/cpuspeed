@@ -19,27 +19,70 @@ scriptname=${0##*/}
 #_____________________________________________________________________
 #
 scriptfile=/tmp/doscripts_$$.sh
+declare -a hostnames
+
+########################################################################
+# add the systems to the list one at a time.  This makes adding a 
+# single system later an easier process.
+########################################################################
+hostnames=("opti.sea2cloud.com")
+hostnames+=("Inspiron3185")
+hostnames+=("hplap")
+hostnames+=("pi04-040-02")
+hostnames+=("PI04-08-03")
+hostnames+=("pi3")
+
+########################################################################
+# Here is the script that will be run on each of the systems.
+########################################################################
 cat > ${scriptfile} << EOF
 #!/bin/bash
-if [[ ! -d /home/rnovak/github/mcperf ]]
-cd ~rnovak/github/cpuspeed
+if [[ ! -d /home/rnovak/github/sysperf ]]
+then
+	mkdir -p /home/rnovak/github
+	cd /home/rnovak/github
+	git clone git@github.com:sailnfool/sysperf.git
+fi
+cd ~rnovak/github/sysperf
 git pull
 sleep 3
 make
-cd ~rnovak/github/cpuspeed/results
+cd ~rnovak/github/sysperf/results
 rm *.csv *.txt *.sh
 mkdir valid_results working_scripts
-awrapper
+allwrapper
+localscript=\$(echo "/tmp/script_\$(hostname)\$\$.sh")
+echo "#!/bin/bash" > \${localscript}
 for script in script*.sh
 do
-  bash -x \${script}
+  echo "bash -x \${script}" >> \${localscript}
 done
+bash -x \${localscript\} 2>&1 | tee /tmp/\$(hostname)_log_\$\$.txt &
 EOF
-# for i in optiplex980 inspiron3185 hplap lr br pi3
-# do
-#   echo Working on $i
-#   ssh ${USER}@$i 'bash -s -x' ${scriptfile} &
-# done
+
+########################################################################
+# For each of hte systems we will execute the above generated scripts
+# Note that the locally generated script is run as a background task
+# to insure that it can continue to run.  Note that the output of
+# the background script is sent to /tmp/hostname_log_$$.txt so that
+# we are able to run a shell on each host and peform "tail -f" on the
+# file to monitor the progress on the remote host.
+########################################################################
+for rhost in "${hostnames[@]}"
+do
+  ######################################################################
+  # Make sure we don't ssh to the local host we treat this case later
+  ######################################################################
+  if [[ ! "${rhosts}" = "$(hostname)" ]]
+  then
+    echo Working on $i
+    ssh ${USER}@${rhost} 'bash -s -x' ${scriptfile} &
+  fi
+done
+
+########################################################################
+# Now execute the script locally
+########################################################################
 bash -x ${scriptfile}
 rm -f ${scriptfile}
 
