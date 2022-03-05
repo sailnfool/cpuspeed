@@ -113,7 +113,10 @@ for script in script*.sh
 do
   echo "bash -x \${script}" >> \${localscript}
 done
-bash -x \${localscript} 2>&1 | tee /tmp/\$(hostname)_log_\$\$.txt &
+logname="/tmp/\$(hostname)_log_\$\$.txt"
+rm -f \${logname}
+touch \${logname}
+bash -x \${localscript} 2>&1 | tee -a \${logname} &
 EOF
 
 ########################################################################
@@ -139,7 +142,14 @@ done
 
 ########################################################################
 # Now execute the script locally
+# we have to make sure there are no other logfiles then since we dont't
+# know the process ID of the child process that creates the log file
+# we have to 
 ########################################################################
+rm -f /tmp/$(hostname)_log_*.txt
 bash -x ${scriptfile} &
-tail -f /tmp/$(hostname)_log_$$.txt
+childid=${!}
+# Give the child time to start
+sleep 2
+tail -f /tmp/$(hostname)_log_${childid}.txt
 
