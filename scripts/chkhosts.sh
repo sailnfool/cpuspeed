@@ -44,7 +44,7 @@ do
   ######################################################################
   # Make sure we don't ssh to the local host we treat this case later
   ######################################################################
-  if [[ ! "${rhosts}" = "$(hostname)" ]]
+  if [[ ! "${rhost}" = "$(hostname)" ]]
   then
     echo Working on $i
     ssh ${USER}@${rhost} 
