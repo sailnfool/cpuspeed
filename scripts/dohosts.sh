@@ -20,6 +20,10 @@ scriptname=${0##*/}
 #
 scriptfile=/tmp/doscripts_$$.sh
 declare -a hostnames
+USAGE="Run the mcperf script on multipl machines\r\n
+\t-h\t\tPrint this message\r\n
+\t-o\t\tRun the test scripts ONLY on this machine\r\n
+"
 
 ########################################################################
 # add the systems to the list one at a time.  This makes adding a 
@@ -28,9 +32,40 @@ declare -a hostnames
 hostnames=("opti.sea2cloud.com")
 hostnames+=("Inspiron3185")
 hostnames+=("hplap")
-hostnames+=("pi04-040-02")
+hostnames+=("PI04-04-02")
 hostnames+=("PI04-08-03")
 hostnames+=("pi3")
+########################################################################
+# Define all of the optionargs documented in USAGE.
+########################################################################
+optionargs="ho"
+
+########################################################################
+# Process the Command Line options based on the Usage above
+########################################################################
+while getopts ${optionargs} name
+do
+  case ${name} in
+  h)
+    echo -e ${USAGE}
+    exit 0
+    ;;
+  o)
+    thishost=$(hostname)
+    hostnames=("${thishost}")
+    ;;
+  \?)
+    errecho "-e" "invalid option: ${OPTARG}"
+    errecho "-e" ${USAGE}
+    exit 1
+    ;;
+  esac
+done
+shift $((OPTIND-1))
+########################################################################
+# End of processing Command Line arguments
+########################################################################
+
 
 ########################################################################
 # Here is the script that will be run on each of the systems.
