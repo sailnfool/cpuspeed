@@ -150,6 +150,12 @@ rm -f /tmp/$(hostname)_log_*.txt
 bash -x ${scriptfile} &
 childid=${!}
 # Give the child time to start
-sleep 2
-tail -f /tmp/$(hostname)_log_${childid}.txt
+logfile="/tmp/$(hostname)_log_${childid}.txt"
+count=1
+while [[ ! -r ${logfile} ]]
+do
+  sleep 2
+  ((count++))
+done
+tail -f ${logfile}
 
