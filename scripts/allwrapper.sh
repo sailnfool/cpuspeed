@@ -20,10 +20,16 @@ scriptname=${0##*/}
 ########################################################################
 source func.errecho
 
-if [[ $(which mwrapper) ]]
+if [[ $(which onewrapper) ]]
 then
-  mwrapper -c 512 15 5
-  mwrapper -c 1 15 5
+
+  ######################################################################
+  # Create a set of shell scripts where the count of the number of
+  # copies of the dictionary (-c 1) is given and the scripts will test
+  # from one to 15K copies in increments of 5K
+  ######################################################################
+  onewrapper -c 1 15 5
+  onewrapper -c 512 15 5
 else
-  errecho -e "cannot find mwrapper.  Did you run make install?"
+  errecho -e "cannot find onewrapper.  Did you run make install?"
 fi
