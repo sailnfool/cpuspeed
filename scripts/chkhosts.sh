@@ -27,7 +27,7 @@ declare -a hostnames
 hostnames=("opti.sea2cloud.com")
 hostnames+=("Inspiron3185")
 hostnames+=("hplap")
-hostnames+=("pi04-040-02")
+hostnames+=("PI04-04-02")
 hostnames+=("PI04-08-03")
 hostnames+=("pi3")
 
