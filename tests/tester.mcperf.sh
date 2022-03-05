@@ -4,6 +4,7 @@ source func.nice2num
 source func.errecho
 source func.insufficient
 
+TESTNAME="Test of funcdtion mcperf from \n\thttps://github.com/sailnfool/sysperf"
 declare -a hashes
 
 hashes=("b2sum" "sha1sum" "sha256sum" "sha512sum")
@@ -76,7 +77,7 @@ while [[ ${count} -le ${max} ]]
 do
   for myhash in "${!hashes[@]}"
   do
-    echo "cpuspeed_function -n -s ${hashes[${myhash}]} ${count}Kib" | 
+    echo "mcperf -n -s ${hashes[${myhash}]} ${count}Kib" | 
       tee -a ${outdir}/${scripter}
   done
   if [[ "${count}" -eq "1" ]]
