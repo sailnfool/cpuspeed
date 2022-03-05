@@ -1,7 +1,7 @@
 #!/bin/bash
 scriptname=${0##*/}
 ########################################################################
-# Copyright (c) 2020 Sea2Cloud Storage, Inc.  All Rights Reserved
+# Copyright (c) 2022 Sea2Cloud Storage, Inc.  All Rights Reserved
 # Modesto, CA 95356
 #
 # mcpuspeed - Collect relative performance data on CPU speed
