@@ -2,10 +2,10 @@
 .ONESHELL:
 all: scripts
 scripts:
-	cd scripts
+	cd func
 	make uninstall install
 	cd ..
-	cd func
+	cd scripts
 	make uninstall install
 	cd ..
 test:
