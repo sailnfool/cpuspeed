@@ -4,12 +4,12 @@ scriptname=${0##*/}
 # Copyright (c) 2020 Sea2Cloud Storage, Inc.  All Rights Reserved
 # Modesto, CA 95356
 #
-# mwrapper - generate a script that will repeatedly invoke a
-#            list of hash functions with different repetition
-#            counts for the mcspeed script which includes not
-#            only hash functions but can invoke dd to look at
-#            subtracting the I/O overhead from the hash
-#            computation.
+# onewrapper - generate a script that will repeatedly invoke a
+#              list of hash functions with different repetition
+#              counts for the mcspeed script which includes not
+#              only hash functions but can invoke dd to look at
+#              subtracting the I/O overhead from the hash
+#              computation.
 # Author - Robert E. Novak aka REN
 #	sailnfool@gmail.com
 #	skype:sailnfool.ren
@@ -38,7 +38,9 @@ hashes=("b2sum" "sha1sum" "sha256sum" "sha512sum" "dd")
 
 ########################################################################
 # Verify that binaries for each of the hash functions are found on 
-# this machine
+# this machine.  Note that this test is also done for "dd" but it 
+# would be sacrilege to not find "dd" on a machine interesting enough
+# to test.
 ########################################################################
 for myhash in "${hashes[@]}"
 do
@@ -49,6 +51,11 @@ do
     sudo apt install coreutils
   fi
 done
+
+########################################################################
+# It turns out that /usr/bin/time is not installed by default on all
+# systems.
+########################################################################
 if [[ ! $(which time) ]]
 then
   errecho "-e" "/usr/bin/time not found"
@@ -56,6 +63,11 @@ then
   sudo apt install time
 fi
 
+########################################################################
+# We use the Universal Coordinated Time (AKA Greenwich time) to allow
+# for the fact that some remote machines might be in different time
+# zones.
+########################################################################
 UCTdatetime=$(date -u "+%Y%m%d_%H%M")
 testname="$(hostname)_${UCTdatetime}"
 maxiterations=50
@@ -266,6 +278,7 @@ fi
 # a small cleanup.  During testing I realized that both the shell
 # scripts and the results files needed the numcopies appended to
 # the names to make sure all variants were run.
+# Later amended to remove the numcopies from the names.
 ########################################################################
 
 ########################################################################
@@ -299,13 +312,21 @@ do
     scriptfile=script_${testname}.sh
     if [[ ! -r "${outdir}/${scriptfile}" ]]
     then
+
+      ##################################################################
+      # generate the scriptfile for a particular hash (or dd)
+      ##################################################################
       echo "#!/bin/bash" | tee -a ${outdir}/${scriptfile}
       echo "# ${outdir}/${scriptfile}" | tee -a ${outdir}/${scriptfile}
     fi
-    echo "mcspeed -r \"${outdir}\" -c ${numcopies} \
+    echo "mcperf -r \"${outdir}\" -c ${numcopies} \
       -w ${waitdivisor} -n -s ${myhash} ${count}Kib " \
       | tee -a ${outdir}/${scriptfile}
   done
+
+  ######################################################################
+  # Handle the boundary case of 1 to 5 instead of going from 1 to 6
+  ######################################################################
   if [[ "${count}" -eq "1" ]]
   then
     count=$((count+(iterincrement-1)))
