@@ -49,8 +49,14 @@ sleep 3
 make
 cd ~rnovak/github/sysperf/results
 rm *.csv *.txt *.sh
-[[ ! -d valid_results ]] && mkdir valid_results
-[[ ! -d working_scripts ]] && mkdir working_scripts
+if [[ ! -d valid_results ]]
+then
+  mkdir valid_results
+fi
+if [[ ! -d working_scripts ]]
+then
+  mkdir working_scripts
+fi
 allwrapper
 localscript=\$(echo "/tmp/script_\$(hostname)\$\$.sh")
 echo "#!/bin/bash" > \${localscript}
