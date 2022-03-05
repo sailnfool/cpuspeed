@@ -20,21 +20,14 @@ scriptname=${0##*/}
 #
 scriptfile=/tmp/doscripts_$$.sh
 declare -a hostnames
+
+thismachineonly="FALSE"
+
 USAGE="Run the mcperf script on multipl machines\r\n
 \t-h\t\tPrint this message\r\n
 \t-o\t\tRun the test scripts ONLY on this machine\r\n
 "
 
-########################################################################
-# add the systems to the list one at a time.  This makes adding a 
-# single system later an easier process.
-########################################################################
-hostnames=("opti.sea2cloud.com")
-hostnames+=("Inspiron3185")
-hostnames+=("hplap")
-hostnames+=("PI04-04-02")
-hostnames+=("PI04-08-03")
-hostnames+=("pi3")
 ########################################################################
 # Define all of the optionargs documented in USAGE.
 ########################################################################
@@ -51,8 +44,7 @@ do
     exit 0
     ;;
   o)
-    thishost=$(hostname)
-    hostnames=("${thishost}")
+    thismachineonly="TRUE"
     ;;
   \?)
     errecho "-e" "invalid option: ${OPTARG}"
@@ -65,6 +57,22 @@ shift $((OPTIND-1))
 ########################################################################
 # End of processing Command Line arguments
 ########################################################################
+if [[ "${thismachineonly}" = "TRUE" ]]
+then
+  thishost=$(hostname)
+  hostnames=("${thishost}")
+else
+	######################################################################
+	# add the systems to the list one at a time.  This makes adding a 
+	# single system later an easier process.
+	######################################################################
+	hostnames=("opti.sea2cloud.com")
+	hostnames+=("Inspiron3185")
+	hostnames+=("hplap")
+	hostnames+=("PI04-04-02")
+	hostnames+=("PI04-08-03")
+	hostnames+=("pi3")
+fi
 
 
 ########################################################################
@@ -110,14 +118,15 @@ EOF
 # we are able to run a shell on each host and peform "tail -f" on the
 # file to monitor the progress on the remote host.
 ########################################################################
+echo "${hostnames[@]}"
 for rhost in "${hostnames[@]}"
 do
   ######################################################################
   # Make sure we don't ssh to the local host we treat this case later
   ######################################################################
-  if [[ ! "${rhosts}" = "$(hostname)" ]]
+  if [[ ! "${rhost}" = "$(hostname)" ]]
   then
-    echo Working on $i
+    echo Working on \"${rhost}\"
     ssh ${USER}@${rhost} 'bash -s -x' ${scriptfile} &
   fi
 done
@@ -126,5 +135,4 @@ done
 # Now execute the script locally
 ########################################################################
 bash -x ${scriptfile}
-rm -f ${scriptfile}
 

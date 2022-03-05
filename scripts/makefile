@@ -2,7 +2,7 @@ SHELL=/bin/bash
 .sh:
 	@rm -f $@
 	cp $< $@
-INSTALL = mcperf onewrapper allwrapper dohosts do1hosts chkhosts
+INSTALL = mcperf onewrapper allwrapper dohosts chkhosts
 
 EXECDIR := $(HOME)/bin
 
