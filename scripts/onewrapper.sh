@@ -284,7 +284,7 @@ fi
 ########################################################################
 # We want to keep the results in the repository
 ########################################################################
-outdir=$HOME/github/cpuspeed/results
+outdir=$HOME/github/sysperf/results
 testoutput=${testname}.csv
 outfile=${outdir}/${testoutput}
 max=${maxiterations}
