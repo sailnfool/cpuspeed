@@ -4,7 +4,7 @@ scriptname=${0##*/}
 # Copyright (c) 2022 Sea2Cloud Storage, Inc.  All Rights Reserved
 # Modesto, CA 95356
 #
-# mcpuspeed - Collect relative performance data on CPU speed
+# mcperf - Collect relative performance data on system speed
 # Author - Robert E. Novak aka REN
 #	sailnfool@gmail.com
 #	skype:sailnfool.ren
@@ -87,7 +87,7 @@ OUTFILE=/tmp/timer_out$$.txt
 hashprogram=$(which sha256sum)
 timerfailure="FALSE"
 waitdivisor=8
-resultdir=${HOME}/github/cpuspeed/results
+resultdir=${HOME}/github/sysperf/results
 
 USAGE="\r\n${scriptname} [-h] [-c <#>] [-l <language> ] [-n]\r\n
 \t\t\t[-s <hashprogram>] [-w <#>] <nicenumber>\r\n
