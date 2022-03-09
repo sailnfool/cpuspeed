@@ -15,6 +15,9 @@ scriptname=${0##*/}
 #_____________________________________________________________________
 # Rev.|Auth.| Date     | Notes
 #_____________________________________________________________________
+# 1.2 | REN |03/09/2022| Added code to delete any prior background
+#                      | copies of the created script and then the
+#                      | logfiles that they may have left behind.
 # 1.1 | REN |03/05/2022| Added command line options for -h and -o
 #                      | the -o to eliminate the script do1host and
 #                      | execute only on the current host. Also made
