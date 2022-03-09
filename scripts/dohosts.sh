@@ -24,7 +24,8 @@ scriptname=${0##*/}
 # 1.0 | REN |03/04/2022| Initial Release
 #_____________________________________________________________________
 #########################################################################
-scriptfile=/tmp/doscripts_$$.sh
+scriptfileprefix="/tmp/doscripts_"
+scriptfile="${scriptfileprefix}$$.sh"
 declare -a hostnames
 
 thismachineonly="FALSE"
@@ -142,20 +143,39 @@ done
 
 ########################################################################
 # Now execute the script locally
-# we have to make sure there are no other logfiles then since we dont't
-# know the process ID of the child process that creates the log file
-# we have to 
+# First, kill any remaining background scripts that might be running.
+########################################################################
+killid=$(ps -ax | grep "bash -x ${scriptfileprefix}" | \
+  grep -v grep| cut  -d " " -f2)
+kill -9 ${killid}
+
+########################################################################
+# Delete any old log files
 ########################################################################
 rm -f /tmp/$(hostname)_log_*.txt
 bash -x ${scriptfile} &
 childid=${!}
+
+########################################################################
 # Give the child time to start
+# We are waiting until the child creates its log file as an indication
+# that the child process has started before we begin waiting with 
+# tail -f to watch the logfile
+########################################################################
 logfile="/tmp/$(hostname)_log_${childid}.txt"
 count=1
+maxcount=40
+sleeptimer=1
+
 while [[ ! -r ${logfile} ]]
 do
-  sleep 2
+  sleep ${sleeptimer}
   ((count++))
+  if [[ "${count}" -ge "${maxcount}" ]]
+  then
+    echo "Child failed to start after $((count*sleeptimer))"
+    exit 1
+  fi
 done
 tail -f ${logfile}
 
