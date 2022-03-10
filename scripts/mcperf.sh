@@ -14,6 +14,8 @@ scriptname=${0##*/}
 #_____________________________________________________________________
 # Rev.|Auth.| Date     | Notes
 #_____________________________________________________________________
+# 1.5 | REN |03/09/2022| Changed the name of the /tmp files to include
+#                      | the name of this file in the /tmp file name.
 # 1.4 | REN |02/28/2022| stripped the system information out of each
 #                      | record and placed it into a separate file that
 #                      | is written only once per host.  Redirected the
@@ -273,11 +275,11 @@ iterations=$((iterations / ${numcopies}))
 # according to the locale, the absolute times are normalized by 
 # dividing the number of total bytes hashed by 1,000,000
 ########################################################################
-TIMER_APP_DEV_NULL=/tmp/mctimer_null$$.sh
-TIMER_APP_DD=/tmp/mctimer_dd$$.sh
-TIMER_APP=/tmp/mctimer$$.sh
-TIMER_OUT=/tmp/mctimeout$$.txt
-TIMER_INPUT=/tmp/mctimein$$
+TIMER_APP_DEV_NULL=/tmp/${scriptname}_$$_timer_null.sh
+TIMER_APP_DD=/tmp/${scriptname}_$$_timer_dd.sh
+TIMER_APP=/tmp/${scriptname}_$$_timer.sh
+TIMER_OUT=/tmp/${scriptname}_$$_timeout.txt
+TIMER_INPUT=/tmp/${scriptname}_$$_timein.input
 rm -f ${TIMER_APP} ${TIMER_OUT} ${TIMER_INPUT} ${TIMER_APP_DEV_NULL} \
   ${TIMER_APP_DEV_NULL}
 
@@ -442,7 +444,6 @@ userrate=$(echo "( ${totsize} / ${userseconds} ) / 1000000" | bc)
 systemrate=$(echo "( ${totsize} / ${sysseconds} ) / 1000000" | bc)
 
 ########################################################################
-rm -f ${TIMER_APP} ${TIMER_OUT} ${TIMER_INPUT}
 
 ########################################################################
 # Remembering if the timing was a failure, add the word "FAILURE - " to
