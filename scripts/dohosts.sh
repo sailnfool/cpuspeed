@@ -147,11 +147,23 @@ done
 ########################################################################
 # Now execute the script locally
 # First, kill any remaining background scripts that might be running.
+# Second, kill any copies of the performance test script "mcperf" that
+# may have been a child of the ${scriptfileprefix} that we killed.
 # Also delete any old copies of the script that may be laying around
 ########################################################################
 killid=$(ps -ax | grep "bash -x ${scriptfileprefix}" | \
   grep -v grep| cut  -d " " -f2)
-kill -9 ${killid}
+if [[ ~ -z "${killid}" ]]
+then
+  kill -9 ${killid}
+fi
+killid=$(ps -ax | grep "bash -x mcperf | \
+  grep -v grep| cut  -d " " -f2)
+if [[ ~ -z "${killid}" ]]
+then
+  kill -9 ${killid}
+fi
+
 rm -f "${scriptfileprefix}*"
 
 ########################################################################
