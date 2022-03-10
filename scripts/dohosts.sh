@@ -147,10 +147,12 @@ done
 ########################################################################
 # Now execute the script locally
 # First, kill any remaining background scripts that might be running.
+# Also delete any old copies of the script that may be laying around
 ########################################################################
 killid=$(ps -ax | grep "bash -x ${scriptfileprefix}" | \
   grep -v grep| cut  -d " " -f2)
 kill -9 ${killid}
+rm -f "${scriptfileprefix}*"
 
 ########################################################################
 # Delete any old log files
