@@ -157,7 +157,7 @@ if [[ ! -z "${killid}" ]]
 then
   kill -9 ${killid}
 fi
-killid=$(ps -ax | grep "bash -x mcperf | \
+killid=$(ps -ax | grep "bash -x mcperf" | \
   grep -v grep| cut  -d " " -f2)
 if [[ ! -z "${killid}" ]]
 then
