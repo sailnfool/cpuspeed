@@ -33,7 +33,7 @@ declare -a hostnames
 
 thismachineonly="FALSE"
 
-USAGE="Run the mcperf script on multipl machines\r\n
+USAGE="Run the mcperf script on multiple machines\r\n
 \t-h\t\tPrint this message\r\n
 \t-o\t\tRun the test scripts ONLY on this machine\r\n
 "
