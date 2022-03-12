@@ -19,6 +19,11 @@ scriptname=${0##*/}
 #_____________________________________________________________________
 # Rev.|Auth.| Date     | Notes
 #_____________________________________________________________________
+# 1.2 | REN |03/11/2022| made -l to start at a different low value
+#                      | than 1.  Testing has shown that the MBytes/sec
+#                      | has been stable across iteration counts.  This
+#                      | allows you to reduce the number of iterations
+#                      | actually tested
 # 1.1 | REN |02/24/2022| Added a parameter to override the date stamp
 #                      | placed on the results csv file.
 # 1.0 | REN |02/20/2022| Initial Release
@@ -72,13 +77,14 @@ UCTdatetime=$(date -u "+%Y%m%d_%H%M")
 testname="$(hostname)_${UCTdatetime}"
 maxiterations=50
 iterincrement=10
+miniterations=1
 numcopies=512
 waitdivisor=8
 suffix=${UCTdatetime}
 ########################################################################
 # Process the command line options
 ########################################################################
-USAGE="${0##*/} [-h] [-c <#>] [-w <#>] [-d <suffix>] [-f <testname>i] [-n]\r\n
+USAGE="${0##*/} [-h] [-c <#>] [-l <#>] [-w <#>] [-d <suffix>] [-f <testname>i] [-n]\r\n
 \t\t\t[<maxiterations> [<increment>]]\r\n
 \t\t<maxiterations> (default ${maxiterations})is the number\r\n
 \t\tof times that the test is performed for each hashtype.  Note\r\n
@@ -98,6 +104,7 @@ USAGE="${0##*/} [-h] [-c <#>] [-w <#>] [-d <suffix>] [-f <testname>i] [-n]\r\n
 \t\t\tthe name of the CSV file where the results are\r\n
 \t\t\ttabulated.\r\n
 \t-h\t\tOutput this message\r\n
+\t-l\t<#>\tStart the number of iterations at this value instead of one.
 \t-n\t\tSend the hash output to /dev/null\r\n
 \t-s\t<hashprogram>\tSpecify which cryptographic hash\r\n
 \t\t\tprogram to use valid values:\r\n
@@ -117,7 +124,7 @@ USAGE="${0##*/} [-h] [-c <#>] [-w <#>] [-d <suffix>] [-f <testname>i] [-n]\r\n
 \t\t\tmileage may vary so perform your own testing.\r\n
 "
 
-optionargs="c:d:hf:ns:w:"
+optionargs="c:d:hf:l:ns:w:"
 NUMARGS=0 #No arguments are mandatory
 
 while getopts ${optionargs} name
@@ -143,6 +150,16 @@ do
     ;;
   f)
     testname="${OPTARG}"
+    ;;
+  l)
+    if [[ "${OPTARG}" =~ ${re_integer} ]]
+    then
+      miniterations="${OPTARG}"
+    else
+      errecho -e "-l requires an integer argument"
+      errecho -e ${USAGE}
+      exit 1
+    fi
     ;;
   n)
     OUTFILE="/dev/null"
@@ -303,7 +320,7 @@ rm -f ${outfile} ${outdir}/sorted.${testoutput}
 # The following kludge is to eliminate any old scriptfiles laying
 # around for this particular test.
 ########################################################################
-count=1
+count=${miniterations}
 while [[ ${count} -le ${max} ]]
 do
   for myhash in "${hashes[@]}"
