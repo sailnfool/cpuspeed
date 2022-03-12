@@ -15,6 +15,11 @@ scriptname=${0##*/}
 #_____________________________________________________________________
 # Rev.|Auth.| Date     | Notes
 #_____________________________________________________________________
+# 1.1 | REN |03/11/2022| Onewrapper added a -l so we can start at a 
+#                      | larger number of iterations than 1.  Testing
+#                      | has shown that the MBytes/sec is stable across
+#                      | all values from 1 to 15+.  This should
+#                      | dramatically reduce testing time
 # 1.0 | REN |02/28/2022| Initial Release
 #_____________________________________________________________________
 ########################################################################
@@ -28,8 +33,8 @@ then
   # copies of the dictionary (-c 1) is given and the scripts will test
   # from one to 15K copies in increments of 5K
   ######################################################################
-  onewrapper -c 1 15 5
-  onewrapper -c 512 15 5
+  onewrapper -c 1 -l 5 5 5
+  onewrapper -c 512 -l 5 5 5
 else
   errecho -e "cannot find onewrapper.  Did you run make install?"
 fi
