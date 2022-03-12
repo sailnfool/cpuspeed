@@ -120,7 +120,7 @@ done
 logname="/tmp/\$(hostname)_log_\$\$.txt"
 rm -f \${logname}
 touch \${logname}
-bash -x \${localscript} 2>&1 | tee -a \${logname} &
+bash -x \${localscript} 2>&1 >> \${logname} &
 EOF
 
 ########################################################################
