@@ -89,6 +89,7 @@ OUTFILE=/tmp/timer_out$$.txt
 hashprogram=$(which sha256sum)
 timerfailure="FALSE"
 waitdivisor=8
+forcetmp=80
 resultdir=${HOME}/github/sysperf/results
 
 USAGE="\r\n${scriptname} [-h] [-c <#>] [-l <language> ] [-n]\r\n
@@ -122,6 +123,9 @@ USAGE="\r\n${scriptname} [-h] [-c <#>] [-l <language> ] [-n]\r\n
 \t\t\tor the special case \"dd\" which helps measure\r\n
 \t\t\tthe file operations (open, read, write)\r\n
 \t\t\twithout the cryptographic processing\r\n
+\t-t\t<#>\tAllow up to ${forcetmp}% < 100% of /tmp to be used\r\n
+\t\t\tfor dictionary copies.  If the dictionary copies will consume\r\n
+\t\t\tmore space then available in /tmp, consider moving /tmp to \"/\"\r\n
 \t-v\t\tturn on verbose mode, currently ignored\r\n
 \t-w\t<#>\tthe divisor used to provide a \"wait\" time for the \r\n
 \t\t\tcopies operation to complete.  When making (e.g. 512)\r\n
@@ -138,7 +142,7 @@ USAGE="\r\n${scriptname} [-h] [-c <#>] [-l <language> ] [-n]\r\n
 ########################################################################
 # Define all of the optionargs documented in USAGE.
 ########################################################################
-optionargs="c:hl:nr:s:vw:"
+optionargs="c:hl:nr:s:t:vw:"
 
 ########################################################################
 # Process the Command Line options based on the Usage above
@@ -151,8 +155,8 @@ do
     then
       numcopies="${OPTARG}"
     else
-      errorecho -e "-c requires an integer argument"
-      errorecho -e ${USAGE}
+      errecho -e "-c requires an integer argument"
+      errecho -e ${USAGE}
       exit 1
     fi
     ;;
@@ -176,6 +180,9 @@ do
     ;;
   l)
     language="${OPTARG}"
+    ;;
+  n)
+    OUTFILE="/dev/null"
     ;;
   r)
     if [[ -d "${OPTARG}" ]]
@@ -216,9 +223,22 @@ do
         exit 2
     esac
     ;;
-  n)
-    OUTFILE="/dev/null"
+  t)
+    if [[ "${OPTARG}" =~ $re_integer ]]
+    then
+      forcetmp="${OPTARG}"
+      if [[ "${forcetmp}" -gt "99" ]]
+      then
+        errecho -e "-t requires a value less than 100"
+        exit 1
+      fi
+    else
+      errecho -e "-c requires an integer argument"
+      errecho -e ${USAGE}
+      exit 1
+    fi
     ;;
+    
   v)
     verbosemode="TRUE"
     ;;
@@ -293,6 +313,46 @@ if [[ -r /tmp/${language}_${numcopies} ]]
 then
   ln /tmp/${language}_${numcopies} ${TIMER_INPUT}
 else
+  ######################################################################
+  # In an attempt to make the program more efficient, I had moved 
+  # /tmp into tmpfs so it is in RAM instead on the same drive as "/"
+  # What I ran into in small memory systems, is that this left
+  # insufficient space on /tmp to create a large number of copies.
+  # Here we test to see if the system has adequate space on /tmp to 
+  # hold the requested number of copies.
+  #
+  # First we find the amount of space necessary to hold the number of
+  # copies of the dictionary.
+  ######################################################################
+  dictsize=$(stat --printf="%s" ${dictpath}/${language})
+  totsize=$((dictsize*numcopies))
+
+  ######################################################################
+  # Now we find the available size of /tmp
+  # If we will ask for more than ${forcetmp} (default 80%) of the 
+  # available space in /tmp, check to see if /tmp is mounted on
+  # tmpfs and suggest the user move /tmp to "/"
+  ######################################################################
+  availtmp=$(echo "$(df /tmp | awk '/\/tmp/ {print $4}') * 1024" | bc)
+  percent_ask=$(echo "( ${totsize} * 100 ) / ( ${availtmp} )" | bc)
+  if [[ "${percent_ask}" -ge "${forcetmp}" ]]
+  then
+    errecho "Requesting ${percent_ask}% of available space in /tmp"
+    errecho "which is currently at ${availtmp}"
+    tmp_mount=$(df /tmp | awk '/\tmp/ {print $1}')
+    if [[ "${tmp_mount}" = "tmpfs" ]]
+    then
+      errecho "/tmp is mounted on tmpfs consider removing the following"
+      errecho "files as sudo to move /tmp to the \"/\" file system"
+      ls -l $(find /etc -name tmp.mount 2> /dev/null)
+      exit 1
+    else
+      errecho "Requested space exeeds ${forcetmp}%, consider using"
+      errecho "-t to override to a value up to 99 or free up additonal"
+      errecho "free up space in \"/\" file system"
+      exit 1
+    fi
+  fi
   for i in $(seq ${numcopies})
   do 
     cat ${dictpath}/${language} >> /tmp/${language}_${numcopies}
