@@ -32,7 +32,7 @@ hostnames+=("PI04-08-03")
 hostnames+=("pi3")
 
 ########################################################################
-# For each of hte systems we will execute the above generated scripts
+# For each of the systems we will execute the above generated scripts
 # Note that the locally generated script is run as a background task
 # to insure that it can continue to run.  Note that the output of
 # the background script is sent to /tmp/hostname_log_$$.txt so that
