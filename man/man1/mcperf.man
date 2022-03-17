@@ -21,10 +21,10 @@ on the local dictionary.  This will report data about the machine
 under test, the size of the dictionary, the effective iterations and
 the MB/Sec at which the hashprogram process the input to generate a
 hash number.
-.br
+
 .I <nicenumber>
 specifies the number of effective iterations.  If the number of copies
-is greater than one the actual iteration count is divided by the 
+is greater than one, then actual iteration count is divided by the 
 number of copies.  E.G., if you specify 5Kib iterations (5120) and 
 the number of concatenated copies is 512, then the actual iteration
 count will be 10.
@@ -100,12 +100,17 @@ own testing.
 .br
 /tmp/american-english_512
 .SH SEE ALSO
-dd(1) b2sum(1) sha1sum(1) sha256sum(1) sha512sum(1)
-.br
-onewrapper(1) allwrapper(1)
+.BR dd (1),
+.BR b2sum (1),
+.BR sha1sum (1),
+.BR sha256sum (1),
+.BR sha512sum (1),
+.BR onewrapper (1),
+.BR allwrapper (1)
 .SH NOTES
 Unless performing unit testing, this is rarely invoked as a standalone
-program.  Most often it is invoded by onewrapper(1).
+program.  Most often it is invoded by
+.BR onewrapper (1).
 .SH EXAMPLES
 .SH AUTHOR
 Robert E. Novak
