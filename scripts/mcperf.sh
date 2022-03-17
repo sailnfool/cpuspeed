@@ -359,6 +359,15 @@ else
   done
   sleeptime=$((numcopies/waitdivisor))
   sleepmessage=$(echo "Sleeping for ${sleeptime} seconds to allow copy to complete")
+  ######################################################################
+  # Force the buffers to flush.
+  ######################################################################
+  sync
+  ######################################################################
+  # This is an old superstition from UNIX days to sync twice and flush
+  # the output to physical media
+  ######################################################################
+  sync 
   # stderrecho ${sleepmessage}
   if [[ "${sleeptime}" -ne "0" ]]
   then
