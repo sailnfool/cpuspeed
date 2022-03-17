@@ -1,0 +1,113 @@
+.TH mcperf 1 "17 March 2022"
+.SH NAME
+mcperf - Measure MB/Sec speed of performing cryptographic hash of the dictionary
+.SH SYNOPSIS
+.B mcperf [ \-h ] [ \-c
+.I <#>
+] [ \-l 
+.I <language>
+] [ \-n ] [ \-s
+.I <hashprogram>
+] [ \-w
+.I <#>
+] 
+.I
+<nicenumber>
+
+.SH DESCRIPTION
+.B mcperf
+performs a <nicenumber> set of iterations of the selected hashprogram
+on the local dictionary.  This will report data about the machine
+under test, the size of the dictionary, the effective iterations and
+the MB/Sec at which the hashprogram process the input to generate a
+hash number.
+.br
+.I <nicenumber>
+specifies the number of effective iterations.  If the number of copies
+is greater than one the actual iteration count is divided by the 
+number of copies.  E.G., if you specify 5Kib iterations (5120) and 
+the number of concatenated copies is 512, then the actual iteration
+count will be 10.
+
+The format of the nice number is a set of digits followed by a nice
+number suffix (E.G., MB for megabytes and MiB for mebibytes).
+.br
+1MB (MegaBytes) 1,000,000
+.br
+1MiB (Mebibytes) 1,048,576
+.br
+1PiB (Pebibytes) 1,125,899,906,843,624
+
+For a complete table of nice suffixes and values:
+
+mcpperf -v -h
+.SS Options
+.TP
+.B \-h
+Print the help message
+.TP
+.B \-c
+.I <#>
+an integer to reflect the number of copies of the dictionary file to
+be concatenated together to reduce the number of times the hash
+program is launched to process a quantity of data.
+.TP
+.B \-l
+.I <language>
+the name of an alternate dictionary
+.TP
+.B \-n
+Send the program (hash or dd) output to /dev/null
+.TP
+.B \-r
+.I <dir>
+the directory where results will be placed.
+.TP
+.B \-s
+.I <hashprogram>
+specify which cryptographic hash program to use. Valid values:
+b2sum; sha1sum; sha256sum; sha512sum.
+.br
+or the special case "dd" which helps measure the file
+operations (open, read, write) without the cryptographic processing.
+.TP
+.B \-t
+.I <#>
+an integer representing the percentage of /tmp that can be used
+for making concatenated copies of the dictionary.  If the dictionary
+copies will condume more space than is available in /tmp (e.g. /tmp
+is mounted in RAM as tmpfs), consider moving /tmp to "/" (root file
+system)
+.TP
+.B \-v
+turn on verbose mode, currently only applies to \-h
+.TP
+.B \-w
+.I <#>
+the divisor used to provid a "wait" (sleep) time for copying the
+dictionary to /tmp to complete.
+When making (e.g. 512) copies of a dictionary
+that is ~1MB in size, it takes time for that operation to complete
+so that it does not interfere with timing the program under test.  On
+a Raspberry PI 4 it appears that it takes a divisor value of
+between 8 and 20 to allow the copy process to complete (flushing the 
+write behind buffers to disk.  Your mileage may vary so perform your
+own testing.
+.SH FILES
+/usr/share/dict/american-english
+.br
+/tmp/american-english_1
+.br
+/tmp/american-english_512
+.SH SEE ALSO
+dd(1) b2sum(1) sha1sum(1) sha256sum(1) sha512sum(1)
+.br
+onewrapper(1) allwrapper(1)
+.SH NOTES
+Unless performing unit testing, this is rarely invoked as a standalone
+program.  Most often it is invoded by onewrapper(1).
+.SH EXAMPLES
+.SH AUTHOR
+Robert E. Novak
+.SH BUGS
+
