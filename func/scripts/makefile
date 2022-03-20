@@ -26,13 +26,13 @@ linstall: $(LINSTALL)
 	mkdir -p $(LEXECDIR)
 	install -o $(USER) -C $? $(LEXECDIR)
 	rm -f $?
-install: $(INSTALL)
-	mkdir -p $(EXECDIR)
-	install -o $(USER) -C $? $(EXECDIR)
-	rm -f $?
-sinstall: $(INSTALL)
-	mkdir -p $(SEXECDIR)
-	install -o root -C $? $(SEXECDIR)
+#install: $(INSTALL)
+#	mkdir -p $(EXECDIR)
+#	install -o $(USER) -C $? $(EXECDIR)
+#	rm -f $?
+#sinstall: $(INSTALL)
+#	mkdir -p $(SEXECDIR)
+#	install -o root -C $? $(SEXECDIR)
 check: $(LINSTALL)
 	set -x ; for execfile in $(LINSTALL); do \
 		if [[ ! $$(diff $$execfile $(LEXECDIR) ) ]] ;\

@@ -1,26 +1,19 @@
 .PHONY: all scripts
 .ONESHELL:
-all: install
+all: linstall
 scripts:
 	cd scripts
-	make uninstall install
+	make uninstall linstall
 	cd ..
 test:
 	cd tests
 	bash dotests.sh
 	cd ..
-install:
+linstall:
 	cd scripts
-	make uninstall install clean
+	make uninstall linstall clean
 	cd ..
 uninstall:
 	cd scripts
 	make uninstall
 	cd ..
-sinstall:
-	cd scripts
-	make suninstall sinstall clean
-	cd ..
-suninstall:
-	cd scripts
-	make suninstall clean
