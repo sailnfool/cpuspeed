@@ -1,11 +1,12 @@
 SHELL=/bin/bash
 PREFIX?=$(HOME)
+LPREFIX?=$(HOME)/.local
 SPREFIX?=/usr/local
 PREFIX2?=/tftpboot/global/rnovak
 .sh:
 	@rm -f $@
 	cp $< $@
-INSTALL =       func.errecho \
+LINSTALL =       func.errecho \
 		func.insufficient \
 		func.kbytes \
 		func.nice2num \
@@ -14,12 +15,17 @@ INSTALL =       func.errecho \
 		func.toseconds \
 
 EXECDIR := $(PREFIX)/bin
+LEXECDIR := $(LPREFIX)/bin
 EXECDIR2 := $(PREFIX2)/bin
 SEXECDIR := $(SPREFIX)/sbin
 
 
 .PHONY: clean uninstall all
-all: $(INSTALL)
+all: $(LINSTALL)
+linstall: $(LINSTALL)
+	mkdir -p $(LEXECDIR)
+	install -o $(USER) -C $? $(LEXECDIR)
+	rm -f $?
 install: $(INSTALL)
 	mkdir -p $(EXECDIR)
 	install -o $(USER) -C $? $(EXECDIR)
@@ -27,6 +33,14 @@ install: $(INSTALL)
 sinstall: $(INSTALL)
 	mkdir -p $(SEXECDIR)
 	install -o root -C $? $(SEXECDIR)
+check: $(LINSTALL)
+	set -x ; for execfile in $(LINSTALL); do \
+		if [[ ! $$(diff $$execfile $(LEXECDIR) ) ]] ;\
+		then \
+			echo "$$execfile is out of date" ; \
+		fi ;\
+		done
+	
 clean: 
 	@for execfile in $(INSTALL); do \
 		echo rm -f $$execfile; \
