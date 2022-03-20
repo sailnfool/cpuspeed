@@ -1,6 +1,5 @@
 .TH mcperf 1 "17 March 2022"
-.SH NAME
-mcperf - Measure MB/Sec speed of performing cryptographic hash of the dictionary
+.SH NAME mcperf \- Measure speed of performing cryptographic hash of the dictionary
 .SH SYNOPSIS
 .B mcperf [ \-h ] [ \-c
 .I <#>
@@ -99,6 +98,56 @@ own testing.
 /tmp/american-english_1
 .br
 /tmp/american-english_512
+.br
+<dir>/hostname.hashname.csv
+.br
+
+.BR E.G.,
+.RS
+~/github/sysperf/results/pi04-04-02.b2sum.csv
+.RE
+will contain a descriptive header line and result values separated by
+the "|" character.  One set of iteration results per row.
+.br
+
+.BR E.G.,
+.RS
+~/github/sysperf/results/DB_pi04-04-02.b2sum.csv
+.RE
+will contain a descriptive header line and a subset of result values
+separated by the "|" character.  Information about the machine under
+test is elided from the data.
+.br
+
+.BR E.G.,
+.RS
+~/github/sysperf/results/pi04-04-02_description.txt
+.RE
+will contain a descriptive header line and a set of values which
+describe the machine (in this example, 
+.I pi04-04-02
+) that describe the host.
+.br
+
+.BR  E.G.,
+(note that the header line and date line shown below are
+normally on a single line
+but are broken up here for clarity of display)
+.br
+
+Hostname|Architecture|cores|CPU max MHz|MEM Total|
+.br
+MEM Used|MEM Free|SWAP Total|S WAP Used|SWAP Free|
+.br
+OS|OS_VERSION_ID|Bogomips
+.br
+
+pi04-04-02|aarch64|4|1500.0000|3.7Gi|
+.br
+1.6Gi|492Mi|3.3Gi|533Mi|2.8Gi|
+.br
+ubuntu|"21.10 "|108.00
+.br
 .SH SEE ALSO
 .BR dd (1),
 .BR b2sum (1),
