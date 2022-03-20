@@ -30,7 +30,6 @@ scriptname=${0##*/}
 #_____________________________________________________________________
 ########################################################################
 source func.kbytes
-source func.nice2num
 source func.errecho
 source func.insufficient
 source func.regex
