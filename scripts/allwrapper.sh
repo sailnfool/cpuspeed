@@ -33,8 +33,17 @@ then
   # copies of the dictionary (-c 1) is given and the scripts will test
   # from one to 15K copies in increments of 5K
   ######################################################################
+  primename="script_$(hostname)_primes.sh"
+  resultdir="~/github/sysperf/results"
   onewrapper -c 1 -l 5 5 5
   onewrapper -c 512 -l 5 5 5
 else
   errecho -e "cannot find onewrapper.  Did you run make install?"
+fi
+set -x
+if [[ -d ${resultdir} ]]
+then
+	echo "#!/bin/bash" > ${resultdir}/${primename}
+	echo "primes 1 5kib" >> ${resultdir}/${primename}
+	/bin/time ${resultdir}/${primename}
 fi
