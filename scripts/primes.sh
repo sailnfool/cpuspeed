@@ -72,8 +72,8 @@ shift $((OPTIND-1))
 
 if [[ "$#" -lt ${NUMARGS} ]]
 then
-  errecho "-e" ${USAGE} $@
-  insufficient ${NUMARGS} $@
+  insufficient "${NUMARGS} $@"
+  errecho "-e" "${USAGE} $@"
   exit -2
 fi
 
@@ -93,6 +93,7 @@ then
       errecho "-e" "Bad nicenumber $1"
       errecho "-e" ${USAGE} $@
       exit -3
+    fi
   fi
   shift
 fi
@@ -110,7 +111,7 @@ then
       errecho "-e" "Bad nicenumber $1"
       errecho "-e" ${USAGE} $@
       exit -3
-  fi
+    fi
   fi
   shift
 fi
