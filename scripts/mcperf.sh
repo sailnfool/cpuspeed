@@ -271,7 +271,13 @@ then
   insufficient ${NUMARGS} $@
   exit -2
 else
-  POWER=$1
+  if [[ "$1" =~ ${re_nicenumber} ]]
+  then
+    POWER=$1
+  else
+    errecho "-e" "Effective iterations is not a nicenmumber $1"
+    errecho "-e" "${USAGE} $@"
+    exit -3
 fi
 
 ########################################################################
