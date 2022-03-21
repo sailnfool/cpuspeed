@@ -14,6 +14,8 @@ scriptname=${0##*/}
 #_____________________________________________________________________
 # Rev.|Auth.| Date     | Notes
 #_____________________________________________________________________
+# 1.6 | REN |03/20/2022| Added a re_nicenumber check to positional 
+#                      | parameter 
 # 1.5 | REN |03/09/2022| Changed the name of the /tmp files to include
 #                      | the name of this file in the /tmp file name.
 # 1.4 | REN |02/28/2022| stripped the system information out of each
@@ -278,6 +280,7 @@ else
     errecho "-e" "Effective iterations is not a nicenmumber $1"
     errecho "-e" "${USAGE} $@"
     exit -3
+  fi
 fi
 
 ########################################################################
