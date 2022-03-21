@@ -2,7 +2,7 @@ SHELL=/bin/bash
 .sh:
 	@rm -f $@
 	cp $< $@
-INSTALL = mcperf onewrapper allwrapper dohosts 
+INSTALL = mcperf onewrapper allwrapper dohosts primes
 
 EXECDIR := $(HOME)/bin
 
