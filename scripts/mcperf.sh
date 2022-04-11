@@ -271,7 +271,10 @@ done
 shift $((OPTIND-1))
 if [[ "${parallel}" = "TRUE" ]]
 then
-  hashprogram="${hashprogram} -a blake2bp"
+  if [[ "${hashprogram}" = "b2sum" ]]
+  then
+    hashprogram="${hashprogram} -a blake2bp"
+  fi
 fi
 ########################################################################
 # End of processing Command Line arguments
@@ -545,8 +548,8 @@ then
 fi
 
 descrip_file=${resultdir}/${host}_description.txt
-resultfile=${resultdir}/${host}.${hashprogram}.csv
-dbfile=${resultdir}/DB_${host}.${hashprogram}.csv
+resultfile=$(echo "${resultdir}/${host}.${hashprogram}.csv" | tr " " "_")
+dbfile=$(echo "${resultdir}/DB_${host}.${hashprogram}.csv" | tr " " "_")
 
 ########################################################################
 # If we haven't done so, then we emit a description file which
