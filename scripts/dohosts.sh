@@ -77,6 +77,7 @@ else
 	# single system later an easier process.
 	######################################################################
 	hostnames=("opti.sea2cloud.com")
+	hostnames+=("newdell")
 	hostnames+=("Inspiron3185")
 	hostnames+=("hplap")
 	hostnames+=("PI04-04-02")
