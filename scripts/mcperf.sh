@@ -14,6 +14,8 @@ scriptname=${0##*/}
 #_____________________________________________________________________
 # Rev.|Auth.| Date     | Notes
 #_____________________________________________________________________
+# 1.7 | REN |04/11/2022| Added a parameter to run b2sum in 4 way
+#                      | Parallel
 # 1.6 | REN |03/20/2022| Added a re_nicenumber check to positional 
 #                      | parameter 
 # 1.5 | REN |03/09/2022| Changed the name of the /tmp files to include
@@ -93,9 +95,10 @@ timerfailure="FALSE"
 waitdivisor=8
 forcetmp=80
 resultdir=${HOME}/github/sysperf/results
+parallel="FALSE"
 
 USAGE="\r\n${scriptname} [-h] [-c <#>] [-l <language> ] [-n]\r\n
-\t\t\t[-s <hashprogram>] [-w <#>] <nicenumber>\r\n
+\t\t\t[-s <hashprogram>] [-w <#>] [-p] <nicenumber>\r\n
 \t\tProvide a nicenumber to control the iterations of the number of\r\n
 \t\ttimes that we take the sha256sum of the local dictionary.  This\t\n
 \t\twill report the architecture of the machine, the size of the\r\n
@@ -118,6 +121,7 @@ USAGE="\r\n${scriptname} [-h] [-c <#>] [-l <language> ] [-n]\r\n
 \t-h\t\tPrint this message\r\n
 \t-l\t\t<language>\tthe name of an alternate dictionary\r\n
 \t-n\t\tSend the hash output to /dev/null\r\n
+\t-p\t\trun the hash algorithm in parallel if available\r\n
 \t-r\t<dir>\tthe directory in which results are placed\r\n
 \t-s\t<hashprogram>\tSpecify which cryptographic hash\r\n
 \t\t\tprogram to use valid values:\r\n
@@ -144,7 +148,7 @@ USAGE="\r\n${scriptname} [-h] [-c <#>] [-l <language> ] [-n]\r\n
 ########################################################################
 # Define all of the optionargs documented in USAGE.
 ########################################################################
-optionargs="c:hl:nr:s:t:vw:"
+optionargs="c:hl:npr:s:t:vw:"
 
 ########################################################################
 # Process the Command Line options based on the Usage above
@@ -185,6 +189,9 @@ do
     ;;
   n)
     OUTFILE="/dev/null"
+    ;;
+  p)
+    parallel="TRUE"
     ;;
   r)
     if [[ -d "${OPTARG}" ]]
@@ -262,6 +269,10 @@ do
   esac
 done
 shift $((OPTIND-1))
+if [[ "${parallel}" = "TRUE" ]]
+then
+  hashprogram="${hashprogram} -a blake2bp"
+fi
 ########################################################################
 # End of processing Command Line arguments
 ########################################################################

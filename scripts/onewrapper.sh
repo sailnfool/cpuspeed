@@ -19,6 +19,8 @@ scriptname=${0##*/}
 #_____________________________________________________________________
 # Rev.|Auth.| Date     | Notes
 #_____________________________________________________________________
+# 1.3 | REN |04/11/2022| Added a -p parameter so that the b2sum hash
+#                      | program can be run in parallel.  Tweaked -n
 # 1.2 | REN |03/11/2022| made -l to start at a different low value
 #                      | than 1.  Testing has shown that the MBytes/sec
 #                      | has been stable across iteration counts.  This
@@ -80,16 +82,19 @@ miniterations=1
 numcopies=512
 waitdivisor=8
 suffix=${UCTdatetime}
+parallel=""
+nullout="-n"
 ########################################################################
 # Process the command line options
 ########################################################################
-USAGE="${0##*/} [-h] [-c <#>] [-l <#>] [-w <#>] [-d <suffix>] [-f <testname>i] [-n]\r\n
-\t\t\t[<maxiterations> [<increment>]]\r\n
+USAGE="${0##*/} [-[hnp]] [-c <#>] [-l <#>] [-w <#>] [-d <suffix>]\r\n
+\t\t[-f <testname>] [<maxiterations> [<increment>]]\r\n
+\r\n
 \t\t<maxiterations> (default ${maxiterations})is the number\r\n
 \t\tof times that the test is performed for each hashtype.  Note\r\n
 \t\tis multiplied by 1024\r\n
 \t\t<increment> (default ${iterincrement}) is the number of\r\n
-\t\tof iterations to bump the test count by each time\t\n
+\t\tof iterations to bump the test count by each time\r\n
 \t-c\t<#>\tThe number of copies of the input file to concatenate\r\n
 \t\t\ttogether to minimize the open/close overhead.\r\n
 \t\t\tNote: the number of copies is appended to the\r\n
@@ -105,6 +110,7 @@ USAGE="${0##*/} [-h] [-c <#>] [-l <#>] [-w <#>] [-d <suffix>] [-f <testname>i] [
 \t-h\t\tOutput this message\r\n
 \t-l\t<#>\tStart the number of iterations at this value instead of one.
 \t-n\t\tSend the hash output to /dev/null\r\n
+\t-p\t\tFor b2sum, run the hash application in 4 way parallel\r\n
 \t-s\t<hashprogram>\tSpecify which cryptographic hash\r\n
 \t\t\tprogram to use valid values:\r\n
 \t\t\tb2sum; sha1sum; sha256sum; sha512sum\r\n
@@ -123,7 +129,7 @@ USAGE="${0##*/} [-h] [-c <#>] [-l <#>] [-w <#>] [-d <suffix>] [-f <testname>i] [
 \t\t\tmileage may vary so perform your own testing.\r\n
 "
 
-optionargs="c:d:hf:l:ns:w:"
+optionargs="c:d:hf:l:nps:w:"
 NUMARGS=0 #No arguments are mandatory
 
 while getopts ${optionargs} name
@@ -161,7 +167,10 @@ do
     fi
     ;;
   n)
-    OUTFILE="/dev/null"
+    nullout="-n"
+    ;;
+  p)
+    parallel="-p"
     ;;
   s)
     hashprogram="${OPTARG}"
@@ -336,7 +345,7 @@ do
       echo "# ${outdir}/${scriptfile}" | tee -a ${outdir}/${scriptfile}
     fi
     echo "mcperf -r \"${outdir}\" -c ${numcopies} \
-      -w ${waitdivisor} -n -s ${myhash} ${count}Kib " \
+      -w ${waitdivisor} ${nullout} ${parallel} -s ${myhash} ${count}Kib " \
       | tee -a ${outdir}/${scriptfile}
   done
 
