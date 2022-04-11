@@ -21,18 +21,34 @@ scriptname=${0##*/}
 # Author - Robert E. Novak aka REN
 # sailnfool@gmail.com
 # skype: sailnfool.ren
+#
+# License CC by Sea2Cloud Storage, Inc.
+# see https://creativecommons.org/licenses/by/4.0/legalcode
+# for a complete copy of the Creative Commons Attribution license
+#_____________________________________________________________________
+# Rev.|Auth.| Date     | Notes
+#_____________________________________________________________________
+# 1.1 | REN |04/08/2022| Improved documentation
+# 1.0 | REN |02/20/2022| Initial Release
+#_____________________________________________________________________
+#
 ########################################################################
 
 fail=0
 ########################################################################
-# COlor sequences cribbed from:
+# Color sequences cribbed from:
 # https://en.wikipedia.org/wiki/ANSI_escape_code
 ########################################################################
 failstring="[\033[91mFAIL\033[m]"
 passstring="[\033[92mPASS\033[m]"
 nametext="TESTNAME="
-for test_script in tester.*.sh
+testprefix="tester"
+for test_script in ${testprefix}.*.sh
 do
+  ######################################################################
+  # pull the TESTNAME from each testing file and issue an error if it
+  # does not exist
+  ######################################################################
   testname=$(grep -h "${nametext}" ${test_script})
   if [[ -z "${testname}" ]]
   then
@@ -40,6 +56,11 @@ do
     echo "${failstring} ${test_script}"
     ((fail++))
   fi
+
+  ######################################################################
+  # Execute each testscript and issue the pass/fail message as
+  # appropriate
+  ######################################################################
   if [[ ! ${test_script} ]]
   then
     echo -e "${failstring} ${test_script}\n\t${testname:${#nametext}}"
@@ -48,4 +69,9 @@ do
     echo -e "${passstring} ${test_script}\n\t${testname:${#nametext}}"
   fi
 done
+
+########################################################################
+# Note that we have kept track if any tests failed.  If all worked,
+# then we exit cleanly.
+########################################################################
 exit ${fail}
