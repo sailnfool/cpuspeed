@@ -40,7 +40,11 @@ source func.regex
 # Declare the list of default hash functions that will be tested
 ########################################################################
 declare -a hashes
-hashes=("b2sum" "sha1sum" "sha256sum" "sha512sum" "dd")
+hashes=("b2sum")
+hashes+=("sha1sum")
+hashes+=("sha256sum")
+hashes+=("sha512sum")
+hashes+=("dd")
 
 ########################################################################
 # Verify that binaries for each of the hash functions are found on 
@@ -80,14 +84,13 @@ maxiterations=50
 iterincrement=10
 miniterations=1
 numcopies=512
-waitdivisor=8
 suffix=${UCTdatetime}
 parallel=""
 nullout="-n"
 ########################################################################
 # Process the command line options
 ########################################################################
-USAGE="${0##*/} [-[hnp]] [-c <#>] [-l <#>] [-w <#>] [-d <suffix>]\r\n
+USAGE="${0##*/} [-[hnp]] [-c <#>] [-l <#>] [-d <suffix>]\r\n
 \t\t[-f <testname>] [<maxiterations> [<increment>]]\r\n
 \r\n
 \t\t<maxiterations> (default ${maxiterations})is the number\r\n
@@ -117,19 +120,9 @@ USAGE="${0##*/} [-[hnp]] [-c <#>] [-l <#>] [-w <#>] [-d <suffix>]\r\n
 \t\t\tor the special case \"dd\" which helps measure\r\n
 \t\t\tthe file operations (open, read, write)\r\n
 \t\t\twithout the cryptographic processing\r\n
-\t-w\t<#>\tthe divisor used to provide a \"wait\" time for the \r\n
-\t\t\tcopies operation to complete.  When making (e.g. 512)\r\n
-\t\t\tcopies tof dictionary that is ~1MB in size, it takes\r\n
-\t\t\ttime for that operation to complete so that it does\r\n
-\t\t\tnot delay the \"timing\" function.  Using the\r\n
-\t\t\tgraphical gnome tools that display the\r\n
-\t\t\twrite operations for the system, I have experimented\r\n
-\t\t\twith this on a Raspberry PI 4 and it appears that it\r\n
-\t\t\ttakes a divisor value of between 8 and 20.   Your\r\n
-\t\t\tmileage may vary so perform your own testing.\r\n
 "
 
-optionargs="c:d:hf:l:nps:w:"
+optionargs="c:d:hf:l:nps:"
 NUMARGS=0 #No arguments are mandatory
 
 while getopts ${optionargs} name
@@ -231,16 +224,6 @@ do
         errecho "-e" ${USAGE}
         exit 2
     esac
-    ;;
-  w)
-    if [[ "${OPTARG}" =~ $re_integer ]]
-    then
-      waitdivisor="${OPTARG}"
-    else
-      errecho -e "-w require an integer argument"
-      errecho -e ${USAGE}
-      exit 1
-    fi
     ;;
   \?)
     errecho "-e" "invalid option: ${OPTARG}"
@@ -345,7 +328,7 @@ do
       echo "# ${outdir}/${scriptfile}" | tee -a ${outdir}/${scriptfile}
     fi
     echo "mcperf -r \"${outdir}\" -c ${numcopies} \
-      -w ${waitdivisor} ${nullout} ${parallel} -s ${myhash} ${count}Kib " \
+      ${nullout} ${parallel} -s ${myhash} ${count}Kib " \
       | tee -a ${outdir}/${scriptfile}
   done
 

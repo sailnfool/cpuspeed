@@ -14,6 +14,7 @@ scriptname=${0##*/}
 #_____________________________________________________________________
 # Rev.|Auth.| Date     | Notes
 #_____________________________________________________________________
+# 1.8 | REN |05/04/2022| Eliminate -w since we now sync
 # 1.7 | REN |04/11/2022| Added a parameter to run b2sum in 4 way
 #                      | Parallel
 # 1.6 | REN |03/20/2022| Added a re_nicenumber check to positional 
@@ -92,7 +93,6 @@ language=american-english
 OUTFILE=/tmp/timer_out$$.txt
 hashprogram=$(which sha256sum)
 timerfailure="FALSE"
-waitdivisor=8
 forcetmp=80
 resultdir=${HOME}/github/sysperf/results
 parallel="FALSE"
@@ -133,22 +133,12 @@ USAGE="\r\n${scriptname} [-h] [-c <#>] [-l <language> ] [-n]\r\n
 \t\t\tfor dictionary copies.  If the dictionary copies will consume\r\n
 \t\t\tmore space then available in /tmp, consider moving /tmp to \"/\"\r\n
 \t-v\t\tturn on verbose mode, currently ignored\r\n
-\t-w\t<#>\tthe divisor used to provide a \"wait\" time for the \r\n
-\t\t\tcopies operation to complete.  When making (e.g. 512)\r\n
-\t\t\tcopies tof dictionary that is ~1MB in size, it takes\r\n
-\t\t\ttime for that operation to complete so that it does\r\n
-\t\t\tnot delay the \"timing\" function.  Using the\r\n
-\t\t\tgraphical gnome tools that display the\r\n
-\t\t\twrite operations for the system, I have experimented\r\n
-\t\t\twith this on a Raspberry PI 4 and it appears that it\r\n
-\t\t\ttakes a divisor value of between 8 and 20.   Your\r\n
-\t\t\tmileage may vary so perform your own testing.\r\n
 "
 
 ########################################################################
 # Define all of the optionargs documented in USAGE.
 ########################################################################
-optionargs="c:hl:npr:s:t:vw:"
+optionargs="c:hl:npr:s:t:v"
 
 ########################################################################
 # Process the Command Line options based on the Usage above
@@ -250,16 +240,6 @@ do
     
   v)
     verbosemode="TRUE"
-    ;;
-  w)
-    if [[ "${OPTARG}" =~ $re_integer ]]
-    then
-      waitdivisor="${OPTARG}"
-    else
-      errecho -e "-w require an integer argument"
-      errecho -e ${USAGE}
-      exit 1
-    fi
     ;;
   \?)
     errecho "-e" "invalid option: ${OPTARG}"
@@ -380,8 +360,6 @@ else
   do 
     cat ${dictpath}/${language} >> /tmp/${language}_${numcopies}
   done
-  sleeptime=$((numcopies/waitdivisor))
-  sleepmessage=$(echo "Sleeping for ${sleeptime} seconds to allow copy to complete")
   ######################################################################
   # Force the buffers to flush.
   ######################################################################
@@ -391,16 +369,6 @@ else
   # the output to physical media
   ######################################################################
   sync 
-  # stderrecho ${sleepmessage}
-  if [[ "${sleeptime}" -ne "0" ]]
-  then
-    sleep ${sleeptime}
-          # Observed behavior is that the first time the file is 
-          # created it impacts the timing of the program under test
-          # for large files, presumably waiting for this write
-          # operation to finish. Experiment to find your system
-          # quiesce time.
-  fi
   ln /tmp/${language}_${numcopies} ${TIMER_INPUT}
 fi
 

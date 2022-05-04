@@ -15,6 +15,7 @@ scriptname=${0##*/}
 #_____________________________________________________________________
 # Rev.|Auth.| Date     | Notes
 #_____________________________________________________________________
+# 1.3 | REN |05/04/2022| Removed waitdivisor
 # 1.2 | REN |04/11/2022| added code to drive the parameters that can 
 #                      | be passed to onewrapper
 # 1.1 | REN |03/11/2022| Onewrapper added a -l so we can start at a 
@@ -32,11 +33,10 @@ suffix=${UCTdatetime}
 maxiterations=50
 iterincrement=10
 miniterations=1
-waitdivisor=8
 nullout="-n"
 parallel=""
 
-USAGE="${0##*/} [-[hnp]] [-c <#>] [-l <#>] [-w <#>] [-d <suffix>]\r\n
+USAGE="${0##*/} [-[hnp]] [-c <#>] [-l <#>] [-d <suffix>]\r\n
 \t\t[-f testname] [<maxiterations> [<increment>]]\r\n
 \r\n
 \t\t<maxiterations> (default ${maxiterations})is the number\r\n
@@ -54,19 +54,9 @@ USAGE="${0##*/} [-[hnp]] [-c <#>] [-l <#>] [-w <#>] [-d <suffix>]\r\n
 \t-n\t\ttoggle send the hash output to /dev/null, default is -n\r\n
 \t-p\t\tFor b2sum, run the hash application in 4 way parallel,\r\n
 \t\t\tdefault is NOT parallel\r\n
-\t-w\t<#>\tthe divisor used to provide a \"wait\" time for the \r\n
-\t\t\tcopies operation to complete.  When making (e.g. 512)\r\n
-\t\t\tcopies tof dictionary that is ~1MB in size, it takes\r\n
-\t\t\ttime for that operation to complete so that it does\r\n
-\t\t\tnot delay the \"timing\" function.  Using the\r\n
-\t\t\tgraphical gnome tools that display the\r\n
-\t\t\twrite operations for the system, I have experimented\r\n
-\t\t\twith this on a Raspberry PI 4 and it appears that it\r\n
-\t\t\ttakes a divisor value of between 8 and 20.   Your\r\n
-\t\t\tmileage may vary so perform your own testing.\r\n
 "
 
-optionargs="hl:npw:"
+optionargs="hl:np"
 NUMARGS=0
 while getopts ${optionargs} name
 do
@@ -94,16 +84,6 @@ do
   p)
     parallel="-p"
     ;;
-  w)
-    if [[ "${OPTARG}" =~ $re_integer ]]
-    then
-      waitdivisor="${OPTARG}"
-    else
-      errecho -e "-w require an integer argument"
-      errecho -e ${USAGE}
-      exit 1
-    fi
-    ;;
   \?)
     errecho "-e" "invalid option: ${OPTARG}"
     errecho "-e" ${USAGE}
@@ -124,8 +104,8 @@ then
   ######################################################################
   primename="script_$(hostname)_primes.sh"
   resultdir="~/github/sysperf/results"
-  onewrapper -c 1 ${nullout} ${parallel} -w ${waitdivisor} -l 5 5 5
-  onewrapper -c 512 ${nullout} ${parallel} -w ${waitdivisor} -l 5 5 5
+  onewrapper -c 1 ${nullout} ${parallel} -l 5 5 5
+  onewrapper -c 512 ${nullout} ${parallel} -l 5 5 5
 else
   errecho -e "cannot find onewrapper.  Did you run make install?"
 fi
