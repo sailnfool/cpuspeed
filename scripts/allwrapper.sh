@@ -49,7 +49,8 @@ USAGE="${0##*/} [-[hnp]] [-c <#>] [-l <#>] [-w <#>] [-d <suffix>]\r\n
 \t\twith counts of 1 and 512\r\n
 \t\tfor hash programs that support them\r\n
 \t-h\t\tOutput this message\r\n
-\t-l\t<#>\tStart the number of iterations at this value instead of one.
+\t-l\t<#>\tStart the number of iterations at this value instead of\r\n
+\t\t\tone.\r\n
 \t-n\t\ttoggle send the hash output to /dev/null, default is -n\r\n
 \t-p\t\tFor b2sum, run the hash application in 4 way parallel,\r\n
 \t\t\tdefault is NOT parallel\r\n
