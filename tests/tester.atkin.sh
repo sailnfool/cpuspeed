@@ -43,8 +43,15 @@ ps="primeshell"
 primeshell=/tmp/${ps}_$$.sh
 cat > ${primeshell}  <<EOF
 #!/bin/bash
-bignum=$(echo "2^${1}-1"|bc)
-echo -e "${0##/*}\t$1\t${bignum}"
+source func.regex
+if [[ ! "$1" =~ re_integer ]]
+then
+  echo "${0##/*} parameter is not an integer $1"
+  exit -1
+fi
+power2="$1"
+bignum=$(echo "2^${power2}-1"|bc)
+echo -e "${0##/*}\t${power2}\t${bignum}"
 atkin ${bignum}
 exit $?
 EOF
