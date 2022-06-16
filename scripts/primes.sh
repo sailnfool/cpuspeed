@@ -159,12 +159,12 @@ do
     continue
   fi
   # Still don't know if it is prime or not.  We have to check all
-  # the numbers between the largest known prime and the lowprime
+  # the numbers between the largest known prime and 1/2 of the lowprime
   # we are testing.
 
   ((divisor++))
 
-	while [[ ${divisor} -lt ${candidate} ]]
+  while [[ ${divisor} -le $((${candidate} / 2)) ]]
   do
     if [[ "$((candidate % divisor))" -eq 0 ]]
     then
