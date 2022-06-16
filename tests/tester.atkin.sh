@@ -39,8 +39,8 @@ do
   esac
 done
 shift $((OPTIND-1))
-
-primeshell=/tmp/primeshell_$$.sh
+ps="primeshell"
+primeshell=/tmp/${ps}_$$.sh
 cat > ${primeshell}  <<EOF
 #!/bin/bash
 bignum=$(echo "2^${1}-1"|bc)
@@ -51,10 +51,13 @@ EOF
 chmod +x ${primeshell}
 for pow2 in $(seq 16 96)
 do
-  exitcode=$(${primeshell} ${pow2} 2>&1 | tee -a /tmp/primeshell_$$.txt)
-  if [[ "${exitcode}" -ne 0 ]]
+  bignum=$(echo "2^${pow2}-1"|bc)
+  echo -e "${0##/*}\t${pow2}\t${bignum}"
+  ${primeshell} ${pow2} 2>&1 | tee -a /tmp/${ps}_$$.txt
+  exitstatus=$?
+  if [[ "${exitstatus}" -ne 0 ]]
   then
-    exit ${exitcode}
+    exit ${exitstatus}
   fi
 done
 
