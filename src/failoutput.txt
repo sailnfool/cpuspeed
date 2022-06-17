@@ -1,0 +1,211 @@
+System:
+  Kernel: 5.15.0-1011-raspi aarch64 bits: 64 Console: pty pts/2
+    Distro: Ubuntu 22.04 LTS (Jammy Jellyfish)
+Machine:
+  Type: ARM System: Raspberry Pi 4 Model B Rev 1.4 details: BCM2835
+    rev: d03114 serial: <filter>
+CPU:
+  Info: quad core model: N/A variant: cortex-a72 bits: 64 type: MCP cache:
+    L2: 1024 KiB
+  Speed (MHz): avg: 1500 min/max: 600/1500 cores: 1: 1500 2: 1500 3: 1500
+    4: 1500
+Graphics:
+  Device-1: bcm2711-hdmi0 driver: vc4_hdmi v: N/A
+  Device-2: bcm2711-hdmi1 driver: vc4_hdmi v: N/A
+  Device-3: bcm2711-vc5 driver: vc4_drm v: N/A
+  Display: server: X.org v: 1.21.1.3 driver: X: loaded: modesetting
+    unloaded: fbdev
+    gpu: vc4-drm,vc4_crtc,vc4_dpi,vc4_dsi,vc4_firmware_kms,vc4_hdmi,vc4_hvs,vc4_txp,vc4_v3d,vc4_vec
+    resolution: 3840x2160
+  Message: GL data unavailable for root.
+Audio:
+  Device-1: bcm2711-hdmi0 driver: vc4_hdmi
+  Device-2: bcm2711-hdmi1 driver: vc4_hdmi
+  Device-3: bcm2835-audio driver: bcm2835_audio
+  Sound Server-1: ALSA v: k5.15.0-1011-raspi running: yes
+  Sound Server-2: PulseAudio v: 15.99.1 running: yes
+  Sound Server-3: PipeWire v: 0.3.48 running: yes
+Network:
+  Device-1: bcm2835-mmc driver: mmc_bcm2835
+  IF: wlan0 state: down mac: <filter>
+  Device-2: bcm2711-genet-v5 driver: bcmgenet
+  IF: eth0 state: up speed: 1000 Mbps duplex: full mac: <filter>
+Bluetooth:
+  Device-1: bcm2835-pl011 driver: uart_pl011
+  Report: hciconfig ID: hci0 state: up address: <filter> bt-v: 3.0
+Drives:
+  Local Storage: total: 29.16 GiB used: 21.68 GiB (74.3%)
+  ID-1: /dev/mmcblk0 model: 00000 size: 29.16 GiB
+Partition:
+  ID-1: / size: 28.4 GiB used: 21.53 GiB (75.8%) fs: ext4 dev: /dev/mmcblk0p2
+Swap:
+  ID-1: swap-1 type: zram size: 1.72 GiB used: 297.8 MiB (17.0%)
+    dev: /dev/zram0
+  ID-2: swap-2 type: zram size: 1.72 GiB used: 296.7 MiB (16.9%)
+    dev: /dev/zram1
+  ID-3: swap-3 type: zram size: 1.72 GiB used: 299.2 MiB (17.0%)
+    dev: /dev/zram2
+  ID-4: swap-4 type: zram size: 1.72 GiB used: 297.3 MiB (16.9%)
+    dev: /dev/zram3
+Sensors:
+  System Temperatures: cpu: 41.9 C mobo: N/A
+  Fan Speeds (RPM): N/A
+Info:
+  Processes: 270 Uptime: 5d 16h 29m Memory: 7.7 GiB used: 1.37 GiB (17.8%)
+  gpu: 76 MiB Shell: Sudo inxi: 3.3.13
+1	atkin copies - 1 	Fri Jun 17 12:19:38 AM PDT 2022
+Swap:
+  ID-1: swap-1 type: zram size: 1.72 GiB used: 297.8 MiB (17.0%)
+    dev: /dev/zram0
+  ID-2: swap-2 type: zram size: 1.72 GiB used: 296.7 MiB (16.9%)
+    dev: /dev/zram1
+  ID-3: swap-3 type: zram size: 1.72 GiB used: 299.2 MiB (17.0%)
+    dev: /dev/zram2
+  ID-4: swap-4 type: zram size: 1.72 GiB used: 297.3 MiB (16.9%)
+    dev: /dev/zram3
+Info:
+  Processes: 270 Uptime: 5d 16h 29m Memory: 7.62 GiB used: 1.29 GiB (16.9%)
+  Shell: multitester.atk inxi: 3.3.13
+2	atkin copies - 2 	Fri Jun 17 12:19:44 AM PDT 2022
+Swap:
+  ID-1: swap-1 type: zram size: 1.72 GiB used: 297.8 MiB (17.0%)
+    dev: /dev/zram0
+  ID-2: swap-2 type: zram size: 1.72 GiB used: 296.7 MiB (16.9%)
+    dev: /dev/zram1
+  ID-3: swap-3 type: zram size: 1.72 GiB used: 299.2 MiB (17.0%)
+    dev: /dev/zram2
+  ID-4: swap-4 type: zram size: 1.72 GiB used: 297.3 MiB (16.9%)
+    dev: /dev/zram3
+Info:
+  Processes: 276 Uptime: 5d 16h 29m Memory: 7.62 GiB used: 2.29 GiB (30.1%)
+  Shell: multitester.atk inxi: 3.3.13
+3	atkin copies - 3 	Fri Jun 17 12:19:51 AM PDT 2022
+Swap:
+  ID-1: swap-1 type: zram size: 1.72 GiB used: 297.8 MiB (17.0%)
+    dev: /dev/zram0
+  ID-2: swap-2 type: zram size: 1.72 GiB used: 296.7 MiB (16.9%)
+    dev: /dev/zram1
+  ID-3: swap-3 type: zram size: 1.72 GiB used: 299.2 MiB (17.0%)
+    dev: /dev/zram2
+  ID-4: swap-4 type: zram size: 1.72 GiB used: 297.3 MiB (16.9%)
+    dev: /dev/zram3
+Info:
+  Processes: 280 Uptime: 5d 16h 29m Memory: 7.62 GiB used: 3.29 GiB (43.2%)
+  Shell: multitester.atk inxi: 3.3.13
+4	atkin copies - 4 	Fri Jun 17 12:19:57 AM PDT 2022
+Swap:
+  ID-1: swap-1 type: zram size: 1.72 GiB used: 297.8 MiB (17.0%)
+    dev: /dev/zram0
+  ID-2: swap-2 type: zram size: 1.72 GiB used: 296.7 MiB (16.9%)
+    dev: /dev/zram1
+  ID-3: swap-3 type: zram size: 1.72 GiB used: 299.2 MiB (17.0%)
+    dev: /dev/zram2
+  ID-4: swap-4 type: zram size: 1.72 GiB used: 297.3 MiB (16.9%)
+    dev: /dev/zram3
+Info:
+  Processes: 284 Uptime: 5d 16h 29m Memory: 7.62 GiB used: 4.28 GiB (56.1%)
+  Shell: multitester.atk inxi: 3.3.13
+5	atkin copies - 5 	Fri Jun 17 12:20:03 AM PDT 2022
+Swap:
+  ID-1: swap-1 type: zram size: 1.72 GiB used: 297.8 MiB (17.0%)
+    dev: /dev/zram0
+  ID-2: swap-2 type: zram size: 1.72 GiB used: 296.7 MiB (16.9%)
+    dev: /dev/zram1
+  ID-3: swap-3 type: zram size: 1.72 GiB used: 299.2 MiB (17.0%)
+    dev: /dev/zram2
+  ID-4: swap-4 type: zram size: 1.72 GiB used: 297.3 MiB (16.9%)
+    dev: /dev/zram3
+Info:
+  Processes: 288 Uptime: 5d 16h 29m Memory: 7.62 GiB used: 5.28 GiB (69.2%)
+  Shell: multitester.atk inxi: 3.3.13
+6	atkin copies - 6 	Fri Jun 17 12:20:11 AM PDT 2022
+Swap:
+  ID-1: swap-1 type: zram size: 1.72 GiB used: 297.8 MiB (17.0%)
+    dev: /dev/zram0
+  ID-2: swap-2 type: zram size: 1.72 GiB used: 296.7 MiB (16.9%)
+    dev: /dev/zram1
+  ID-3: swap-3 type: zram size: 1.72 GiB used: 299.2 MiB (17.0%)
+    dev: /dev/zram2
+  ID-4: swap-4 type: zram size: 1.72 GiB used: 297.3 MiB (16.9%)
+    dev: /dev/zram3
+Info:
+  Processes: 292 Uptime: 5d 16h 30m Memory: 7.62 GiB used: 6.28 GiB (82.4%)
+  Shell: multitester.atk inxi: 3.3.13
+7	atkin copies - 7 	Fri Jun 17 12:20:18 AM PDT 2022
+Swap:
+  ID-1: swap-1 type: zram size: 1.72 GiB used: 297.8 MiB (17.0%)
+    dev: /dev/zram0
+  ID-2: swap-2 type: zram size: 1.72 GiB used: 296.7 MiB (16.9%)
+    dev: /dev/zram1
+  ID-3: swap-3 type: zram size: 1.72 GiB used: 299.2 MiB (17.0%)
+    dev: /dev/zram2
+  ID-4: swap-4 type: zram size: 1.72 GiB used: 297.3 MiB (16.9%)
+    dev: /dev/zram3
+Info:
+  Processes: 295 Uptime: 5d 16h 30m Memory: 7.62 GiB used: 7.25 GiB (95.0%)
+  Shell: multitester.atk inxi: 3.3.13
+8	atkin copies - 8 	Fri Jun 17 12:20:26 AM PDT 2022
+Swap:
+  ID-1: swap-1 type: zram size: 1.72 GiB used: 392.5 MiB (22.3%)
+    dev: /dev/zram0
+  ID-2: swap-2 type: zram size: 1.72 GiB used: 391.4 MiB (22.3%)
+    dev: /dev/zram1
+  ID-3: swap-3 type: zram size: 1.72 GiB used: 393.8 MiB (22.4%)
+    dev: /dev/zram2
+  ID-4: swap-4 type: zram size: 1.72 GiB used: 392.6 MiB (22.3%)
+    dev: /dev/zram3
+Info:
+  Processes: 300 Uptime: 5d 16h 30m Memory: 7.62 GiB used: 7.6 GiB (99.6%)
+  Shell: multitester.atk inxi: 3.3.13
+9	atkin copies - 9 	Fri Jun 17 12:20:40 AM PDT 2022
+Swap:
+  ID-1: swap-1 type: zram size: 1.72 GiB used: 565.7 MiB (32.2%)
+    dev: /dev/zram0
+  ID-2: swap-2 type: zram size: 1.72 GiB used: 565.4 MiB (32.2%)
+    dev: /dev/zram1
+  ID-3: swap-3 type: zram size: 1.72 GiB used: 565.1 MiB (32.2%)
+    dev: /dev/zram2
+  ID-4: swap-4 type: zram size: 1.72 GiB used: 564.8 MiB (32.2%)
+    dev: /dev/zram3
+Info:
+  Processes: 304 Uptime: 5d 16h 30m Memory: 7.62 GiB used: 7.62 GiB (99.9%)
+  Shell: multitester.atk inxi: 3.3.13
+10	atkin copies - 10 	Fri Jun 17 12:20:53 AM PDT 2022
+Swap:
+  ID-1: swap-1 type: zram size: 1.72 GiB used: 745.9 MiB (42.5%)
+    dev: /dev/zram0
+  ID-2: swap-2 type: zram size: 1.72 GiB used: 748.5 MiB (42.6%)
+    dev: /dev/zram1
+  ID-3: swap-3 type: zram size: 1.72 GiB used: 750.3 MiB (42.7%)
+    dev: /dev/zram2
+  ID-4: swap-4 type: zram size: 1.72 GiB used: 749.8 MiB (42.7%)
+    dev: /dev/zram3
+Info:
+  Processes: 308 Uptime: 5d 16h 30m Memory: 7.62 GiB used: 7.61 GiB (99.9%)
+  Shell: multitester.atk inxi: 3.3.13
+11	atkin copies - 11 	Fri Jun 17 12:21:06 AM PDT 2022
+Swap:
+  ID-1: swap-1 type: zram size: 1.72 GiB used: 994.3 MiB (56.6%)
+    dev: /dev/zram0
+  ID-2: swap-2 type: zram size: 1.72 GiB used: 991.2 MiB (56.4%)
+    dev: /dev/zram1
+  ID-3: swap-3 type: zram size: 1.72 GiB used: 996.1 MiB (56.7%)
+    dev: /dev/zram2
+  ID-4: swap-4 type: zram size: 1.72 GiB used: 996.4 MiB (56.7%)
+    dev: /dev/zram3
+Info:
+  Processes: 312 Uptime: 5d 16h 31m Memory: 7.62 GiB used: 7.61 GiB (99.8%)
+  Shell: multitester.atk inxi: 3.3.13
+12	atkin copies - 12 	Fri Jun 17 12:21:19 AM PDT 2022
+Swap:
+  ID-1: swap-1 type: zram size: 1.72 GiB used: 1.26 GiB (73.4%)
+    dev: /dev/zram0
+  ID-2: swap-2 type: zram size: 1.72 GiB used: 1.23 GiB (71.9%)
+    dev: /dev/zram1
+  ID-3: swap-3 type: zram size: 1.72 GiB used: 1.25 GiB (72.8%)
+    dev: /dev/zram2
+  ID-4: swap-4 type: zram size: 1.72 GiB used: 1.28 GiB (74.6%)
+    dev: /dev/zram3
+Info:
+  Processes: 316 Uptime: 5d 16h 31m Memory: 7.62 GiB used: 7.61 GiB (99.8%)
+  Shell: multitester.atk inxi: 3.3.13
