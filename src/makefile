@@ -5,10 +5,19 @@ SHELL=/bin/bash
 	@rm -f $@
 	cp $< $@
 
+########################################################################
+# this brings in the local function that are normally in:
+# https://github.com/sailnfool/func.git
+# by default I clone these repositories into ~/github/....git
+# This copies the local shell functions into the src directory and
+# then installs copies in ~/.local/bin which is always in my search
+# path.  I did not want to clutter ~/bin with all of these functions
+# that are very useful to have documented and laying around.
+########################################################################
 PREFIX=$(HOME)
 LPREFIX=$(HOME)/.local
-INSTALL = atkin  
-LINSTALL = func.kbytes func.nice2num func.errecho func.regex
+INSTALL = atkin
+LINSTALL = func.errecho func.regex
 
 EXECDIR := $(PREFIX)/bin
 LEXECDIR := $(LPREFIX)/bin
@@ -36,11 +45,9 @@ uninstall:
 		done
 $(EXECDIR):
 	mkdir -p $(EXECDIR)
-func.kbytes: $(HOME)/github/func/func.kbytes.sh
-func.nice2num: $(HOME)/github/func/func.nice2num.sh
-func.errecho: $(HOME)/github/func/func.insufficient.sh
-func.regex: $(HOME)/github/func/func.regex.sh
-tester.atkin.sh: func.kbytes func.nice2num func.errecho func.regex
+func.errecho: $(HOME)/github/func/scripts/func.insufficient.sh
+func.regex: $(HOME)/github/func/scripts/func.regex.sh
+tester.atkin.sh: func.errecho func.regex
 
 smalltest: atkin
 	echo "2^32-1" | bc
