@@ -10,5 +10,7 @@ do
   echo -e "$i\tcopies of atkins - $(ps -ax | grep atkin | wc -l)" \
     "\t$(date)\r\n$(swapon --show)"|tee -a  test.txt
   ./tester.atkin.sh 30 40 &
+  sync
+  sync
   sleep 10
 done
