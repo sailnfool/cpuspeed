@@ -3,23 +3,23 @@ source func.kbytes
 source func.nice2num
 source func.errecho
 source func.insufficient
+source func.regex
 
 TESTNAME="Test of function atkin from \n\thttps://github.com/sailnfool/sysperf"
 
 testname=biggertest
-maxiterations=50
-iterincrement=10
+lopower=16
+hipower=96
 ########################################################################
 # Process the command line options
 ########################################################################
-USAGE="${0##*/} <testname> <maxiterations> <increment>\r\n
-\t\twhere <testname> (default ${testname}) is the name of the CSV\r\n
-\t\tfile where the results are tabulated\r\n
-\t\tand <maxiterations> (default ${maxiterations})is the number\r\n
-\t\tof times that the test is performed for each hashtype.  Note\r\n
-\t\tis multiplied by 1024\r\n
-\t\t<increment> (default ${iterincrement}) is the number of\r\n
-\t\tof iterations to bump the test count by each time\t\n
+USAGE="${0##*/} [-h] [ <lo#> <hi#> ]\n
+\t\texecute the memory consumptive atkins prime number sieve\n
+\t\twhere <lo#> (default ${lopower} is the power of 2 at the low\n
+\t\t\tend of testing\n
+\t\tand <hi#> (default ${hipower}) is the high end power of 2 for\n
+\t\t\ttesting\n
+\t-h\t\tPrint this help information\n
 "
 
 optionargs="h"
@@ -39,28 +39,54 @@ do
   esac
 done
 shift $((OPTIND-1))
+
+if [[ $# -eq 2 ]]
+then
+  if [[ "$1" =~ $re_integer ]]
+  then
+    lopower="$1"
+  else
+    errecho "-e" "First parameter is not an integer"
+    exit 1
+  fi
+  if [[ "$2" =~ $re_integer ]]
+  then
+    hipower="$2"
+  else
+    errecho "-e" "Second parameter is not an integer"
+    exit 1
+  fi
+fi
 ps="primeshell"
-primeshell=/tmp/${ps}_$$.sh
+primeshell=/tmp/primeshell_$$.sh
+primefile=/tmp/primefile_$$.txt
+
 cat > ${primeshell}  <<EOF
 #!/bin/bash
 source func.regex
-if [[ ! "$1" =~ re_integer ]]
+if [[ "\$#" -ne 1 ]]
 then
-  echo "${0##/*} parameter is not an integer $1"
+  echo "\${0##/*} parameter #1 missing"
+  exit -2
+fi
+if [[ ! "\$1" =~ \$re_integer ]]
+then
+  echo "\${0##/*} parameter is not an integer \$1"
   exit -1
 fi
-power2="$1"
-bignum=$(echo "2^${power2}-1"|bc)
-echo -e "${0##/*}\t${power2}\t${bignum}"
-atkin ${bignum}
-exit $?
+power2="\$1"
+bignum=\$(echo "2^\${power2}-1"|bc)
+echo -e "/tmp/primeshell.sh\t\${power2}\t\${bignum}"
+atkin \${bignum}
+exit \$?
 EOF
+
 chmod +x ${primeshell}
-for pow2 in $(seq 16 96)
+for pow2 in $(seq ${lopower} ${hipower})
 do
   bignum=$(echo "2^${pow2}-1"|bc)
   echo -e "${0##/*}\t${pow2}\t${bignum}"
-  ${primeshell} ${pow2} 2>&1 | tee -a /tmp/${ps}_$$.txt
+  ${primeshell} ${pow2} 2>&1 | tee -a ${primefile}
   exitstatus=$?
   if [[ "${exitstatus}" -ne 0 ]]
   then
