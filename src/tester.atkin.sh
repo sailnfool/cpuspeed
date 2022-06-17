@@ -1,13 +1,9 @@
 #!/bin/bash
-source func.kbytes
-source func.nice2num
 source func.errecho
-source func.insufficient
 source func.regex
 
 TESTNAME="Test of function atkin from \n\thttps://github.com/sailnfool/sysperf"
 
-testname=biggertest
 lopower=16
 hipower=96
 ########################################################################
