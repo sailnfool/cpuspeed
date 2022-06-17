@@ -6,7 +6,7 @@ INSTALL = atkin
 EXECDIR := $(HOME)/bin
 
 atkin: atkin.c
-	gcc  atkin.c -lm
+	gcc  atkin.c -lm -o atkin
 install: $(INSTALL)
 	@mkdir -p $(EXECDIR)
 	install -g $(USER) -o $(USER) -c $? $(EXECDIR)
