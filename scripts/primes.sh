@@ -13,9 +13,9 @@ scriptname=${0##*/}
 # see https://creativecommons.org/licenses/by/4.0/legalcode
 # for a complete copy of the Creative Commons Attribution license
 #_____________________________________________________________________
-# Rev.|Auth.| Date     | Notes
+# Rev.|Aut| Date     | Notes
 #_____________________________________________________________________
-# 1.0 | REN |03/19/2022| Initial Release
+# 1.0 |REN|03/19/2022| Initial Release
 #_____________________________________________________________________
 #
 source func.errecho

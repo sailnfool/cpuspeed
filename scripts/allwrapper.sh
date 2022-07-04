@@ -13,17 +13,17 @@ scriptname=${0##*/}
 # see https://creativecommons.org/licenses/by/4.0/legalcode
 # for a complete copy of the Creative Commons Attribution license
 #_____________________________________________________________________
-# Rev.|Auth.| Date     | Notes
+# Rev.|Aut| Date     | Notes
 #_____________________________________________________________________
-# 1.3 | REN |05/04/2022| Removed waitdivisor
-# 1.2 | REN |04/11/2022| added code to drive the parameters that can 
-#                      | be passed to onewrapper
-# 1.1 | REN |03/11/2022| Onewrapper added a -l so we can start at a 
-#                      | larger number of iterations than 1.  Testing
-#                      | has shown that the MBytes/sec is stable across
-#                      | all values from 1 to 15+.  This should
-#                      | dramatically reduce testing time
-# 1.0 | REN |02/28/2022| Initial Release
+# 1.3 |REN|05/04/2022| Removed waitdivisor
+# 1.2 |REN|04/11/2022| added code to drive the parameters that can
+#                    | be passed to onewrapper
+# 1.1 |REN|03/11/2022| Onewrapper added a -l so we can start at a
+#                    | larger number of iterations than 1.  Testing
+#                    | has shown that the MBytes/sec is stable across
+#                    | all values from 1 to 15+.  This should
+#                    | dramatically reduce testing time
+# 1.0 |REN|02/28/2022| Initial Release
 #_____________________________________________________________________
 ########################################################################
 source func.errecho

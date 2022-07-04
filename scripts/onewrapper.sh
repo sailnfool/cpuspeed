@@ -17,18 +17,18 @@ scriptname=${0##*/}
 # see https://creativecommons.org/licenses/by/4.0/legalcode
 # for a complete copy of the Creative Commons Attribution license
 #_____________________________________________________________________
-# Rev.|Auth.| Date     | Notes
+# Rev.|Aut| Date     | Notes
 #_____________________________________________________________________
-# 1.3 | REN |04/11/2022| Added a -p parameter so that the b2sum hash
-#                      | program can be run in parallel.  Tweaked -n
-# 1.2 | REN |03/11/2022| made -l to start at a different low value
-#                      | than 1.  Testing has shown that the MBytes/sec
-#                      | has been stable across iteration counts.  This
-#                      | allows you to reduce the number of iterations
-#                      | actually tested
-# 1.1 | REN |02/24/2022| Added a parameter to override the date stamp
-#                      | placed on the results csv file.
-# 1.0 | REN |02/20/2022| Initial Release
+# 1.3 |REN|04/11/2022| Added a -p parameter so that the b2sum hash
+#                    | program can be run in parallel.  Tweaked -n
+# 1.2 |REN|03/11/2022| made -l to start at a different low value
+#                    | than 1.  Testing has shown that the MBytes/sec
+#                    | has been stable across iteration counts.  This
+#                    | allows you to reduce the number of iterations
+#                    | actually tested
+# 1.1 |REN|02/24/2022| Added a parameter to override the date stamp
+#                    | placed on the results csv file.
+# 1.0 |REN|02/20/2022| Initial Release
 #_____________________________________________________________________
 ########################################################################
 source func.kbytes

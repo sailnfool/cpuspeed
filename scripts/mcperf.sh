@@ -12,33 +12,33 @@ scriptname=${0##*/}
 # see https://creativecommons.org/licenses/by/4.0/legalcode
 # for a complete copy of the Creative Commons Attribution license
 #_____________________________________________________________________
-# Rev.|Auth.| Date     | Notes
+# Rev.|Aut| Date     | Notes
 #_____________________________________________________________________
-# 1.8 | REN |05/04/2022| Eliminate -w since we now sync
-# 1.7 | REN |04/11/2022| Added a parameter to run b2sum in 4 way
-#                      | Parallel
-# 1.6 | REN |03/20/2022| Added a re_nicenumber check to positional 
-#                      | parameter 
-# 1.5 | REN |03/09/2022| Changed the name of the /tmp files to include
-#                      | the name of this file in the /tmp file name.
-# 1.4 | REN |02/28/2022| stripped the system information out of each
-#                      | record and placed it into a separate file that
-#                      | is written only once per host.  Redirected the
-#                      | sleep message to stderr so it won't clutter
-#                      | result files.  If there is a failure in 
-#                      | timing the applications, put the word 
-#                      | FAILURE at the beginning of the record.
-# 1.3 | REN |02/25/2022| concatenate N copies of the dictionary file
-#                      | together before starting to iterate the
-#                      | cryptographic hashes over 1/Nth the number of
-#                      | iterations.
-# 1.2 | REN |02/20/2022| Track memory and swap usage as well as the
-#                      | Date and time run
-# 1.1 | REN |02/20/2022| Tweaked into a separate github repository
-#                      | Added tracking of memory and swap as well as
-#                      | a complete timestamp for each record created
-#                      | Note that the timestamp is in UCT
-# 1.0 | REN |02/01/2022| Initial Release
+# 1.8 |REN|05/04/2022| Eliminate -w since we now sync
+# 1.7 |REN|04/11/2022| Added a parameter to run b2sum in 4 way
+#                    | Parallel
+# 1.6 |REN|03/20/2022| Added a re_nicenumber check to positional 
+#                    | parameter 
+# 1.5 |REN|03/09/2022| Changed the name of the /tmp files to include
+#                    | the name of this file in the /tmp file name.
+# 1.4 |REN|02/28/2022| stripped the system information out of each
+#                    | record and placed it into a separate file that
+#                    | is written only once per host.  Redirected the
+#                    | sleep message to stderr so it won't clutter
+#                    | result files.  If there is a failure in 
+#                    | timing the applications, put the word 
+#                    | FAILURE at the beginning of the record.
+# 1.3 |REN|02/25/2022| concatenate N copies of the dictionary file
+#                    | together before starting to iterate the
+#                    | cryptographic hashes over 1/Nth the number of
+#                    | iterations.
+# 1.2 |REN|02/20/2022| Track memory and swap usage as well as the
+#                    | Date and time run
+# 1.1 |REN|02/20/2022| Tweaked into a separate github repository
+#                    | Added tracking of memory and swap as well as
+#                    | a complete timestamp for each record created
+#                    | Note that the timestamp is in UCT
+# 1.0 |REN|02/01/2022| Initial Release
 #_____________________________________________________________________
 #
 ########################################################################

@@ -13,18 +13,18 @@ scriptname=${0##*/}
 # see https://creativecommons.org/licenses/by/4.0/legalcode
 # for a complete copy of the Creative Commons Attribution license
 #_____________________________________________________________________
-# Rev.|Auth.| Date     | Notes
+# Rev.|Aut| Date     | Notes
 #_____________________________________________________________________
-# 1.2 | REN |03/09/2022| Added code to delete any prior background
-#                      | copies of the created script and then the
-#                      | logfiles that they may have left behind.
-# 1.1 | REN |03/05/2022| Added command line options for -h and -o
-#                      | the -o to eliminate the script do1host and
-#                      | execute only on the current host. Also made
-#                      | the execution on the currrent host a
-#                      | task to survive an ssh disconnect and can
-#                      | resume monitoring by tail -f of the log file
-# 1.0 | REN |03/04/2022| Initial Release
+# 1.2 |REN|03/09/2022| Added code to delete any prior background
+#                    | copies of the created script and then the
+#                    | logfiles that they may have left behind.
+# 1.1 |REN|03/05/2022| Added command line options for -h and -o
+#                    | the -o to eliminate the script do1host and
+#                    | execute only on the current host. Also made
+#                    | the execution on the currrent host a
+#                    | task to survive an ssh disconnect and can
+#                    | resume monitoring by tail -f of the log file
+# 1.0 |REN|03/04/2022| Initial Release
 #_____________________________________________________________________
 #########################################################################
 scriptfileprefix="/tmp/doscripts_"
