@@ -160,13 +160,15 @@ do
     echo -e ${USAGE}
     if [[ "${verbosemode}" == "TRUE" ]]
     then
-      for i in { 0 $((${#__kbytessuffix}-1)) }
+#      for i in { 0 $((${#__kbytessuffix}-1)) }
+      for ((i=0;i<${#__kbytessuffix};i++))
       do
         bytesuffix=${__kbytessuffix:${i}:1}
         echo -e "${bytesuffix}\t${__kbytesvalue[${bytesuffix}]}"
       done
       echo ""
-      for i in { 0 $((${#__kbytessuffix}-1)) }
+#      for i in { 0 $((${#__kbytessuffix}-1)) }
+      for ((i=0;i<${#__kbytessuffix};i++))
       do
         bibytesuffix=${__kbibytessuffix[${i}]}
         echo -e "${bibytesuffix}\t${__kbibytesvalue[${bibytesuffix}]}"
@@ -356,7 +358,8 @@ else
       exit 1
     fi
   fi
-  for i in { 1 ${numcopies} }
+#  for i in { 1 ${numcopies} }
+  for ((i=1;i<=${numcopies};i++))
   do 
     cat ${dictpath}/${language} >> /tmp/${language}_${numcopies}
   done
