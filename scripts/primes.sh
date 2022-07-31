@@ -44,13 +44,13 @@ do
     echo -e ${USAGE}
     if [[ "${verbosemode}" == "TRUE" ]]
     then
-      for i in $(seq 0 $((${#__kbytessuffix}-1)) )
+      for i in { 0 $((${#__kbytessuffix}-1)) }
       do
         bytesuffix=${__kbytessuffix:${i}:1}
         echo -e "${bytesuffix}\t${__kbytesvalue[${bytesuffix}]}"
       done
       echo ""
-      for i in $(seq 0 $((${#__kbytessuffix}-1)) )
+      for i in { 0 $((${#__kbytessuffix}-1)) }
       do
         bibytesuffix=${__kbibytessuffix[${i}]}
         echo -e "${bibytesuffix}\t${__kbibytesvalue[${bibytesuffix}]}"

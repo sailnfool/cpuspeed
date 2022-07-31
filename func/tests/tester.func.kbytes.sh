@@ -64,7 +64,7 @@ then
   errecho -i "__kbibytesvalue not initialized"
   exit 1
 fi
-for i in $(seq 0 $((${#__kbytessuffix}-1)) )
+for i in { 0 $((${#__kbytessuffix}-1)) }
 do
   bytesuffix=${__kbytessuffix:${i}:1}
   bibytesuffix=${__kbibytessuffix[${i}]}

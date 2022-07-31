@@ -26,7 +26,7 @@ testresult[3]="72640.25"
 testvalue[4]=".08"
 testresult[4]="0.08"
 resultvar=0
-for i in $(seq 0 4)
+for i in { 0 4}
 do
   answer=$(toseconds "${testvalue[${i}]}")
   echo "answer=${answer}; test=${testvalue[${i}]}"

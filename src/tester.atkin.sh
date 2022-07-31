@@ -78,7 +78,7 @@ exit \$?
 EOF
 
 chmod +x ${primeshell}
-for pow2 in $(seq ${lopower} ${hipower})
+for pow2 in { ${lopower} ${hipower} }
 do
   bignum=$(echo "2^${pow2}-1"|bc)
   echo -e "${0##/*}\t${pow2}\t${bignum}"
