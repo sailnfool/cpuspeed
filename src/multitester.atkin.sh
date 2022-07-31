@@ -8,7 +8,7 @@ then
 fi
 rm -f ${outfile}
 sudo inxi -Fz > ${outfile}
-for i in { 1 30 }
+for i in {1..30}
 do
   echo -e "$i\tatkin copies - $(ps -ax | grep 'atkin ' | wc -l)" \
     "\t$(date)\r\n$(inxi -I --swap)"|tee -a  ${outfile}
