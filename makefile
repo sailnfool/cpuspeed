@@ -1,10 +1,6 @@
 .PHONY: all scripts
 .ONESHELL:
-all: func scripts src
-func:
-	cd func
-	make uninstall install
-	cd ..
+all: scripts src
 scripts:
 	cd scripts
 	make uninstall install
