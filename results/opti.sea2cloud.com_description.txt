@@ -1,0 +1,2 @@
+Hostname|Architecture|cores|CPU max MHz|MEM Total|MEM Used|MEM Free|SWAP Total|SWAP Used|SWAP Free|OS|OS_VERSION_ID|Bogomips
+opti.sea2cloud.com|x86_64|4|3193.0000|7.8Gi|669Mi|248Mi|7.0Gi|19Mi|7.0Gi|ubuntu|"21.10"|6383.39

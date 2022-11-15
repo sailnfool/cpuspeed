@@ -1,0 +1,9 @@
+Lookup Value|MB/Sec Wall|MB/Sec User|MB/Sec System
+opti.sea2cloud.com_sha512sum_1_1024|152|175|1030
+opti.sea2cloud.com_sha512sum_1_5120|143|167|920
+opti.sea2cloud.com_sha512sum_1_10240|144|166|970
+opti.sea2cloud.com_sha512sum_1_15360|142|166|927
+opti.sea2cloud.com_sha512sum_512_1024|250|265|4346
+opti.sea2cloud.com_sha512sum_512_5120|250|261|5950
+opti.sea2cloud.com_sha512sum_512_10240|249|261|5261
+opti.sea2cloud.com_sha512sum_512_15360|247|259|5595

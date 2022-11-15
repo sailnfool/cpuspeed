@@ -1,0 +1,9 @@
+Lookup Value|MB/Sec Wall|MB/Sec User|MB/Sec System
+opti.sea2cloud.com_dd_1_1024|246|812|344
+opti.sea2cloud.com_dd_1_5120|255|804|361
+opti.sea2cloud.com_dd_1_10240|252|814|354
+opti.sea2cloud.com_dd_1_15360|246|818|341
+opti.sea2cloud.com_dd_512_1024|497|1960|670
+opti.sea2cloud.com_dd_512_5120|482|1999|636
+opti.sea2cloud.com_dd_512_10240|481|2003|633
+opti.sea2cloud.com_dd_512_15360|488|2068|640

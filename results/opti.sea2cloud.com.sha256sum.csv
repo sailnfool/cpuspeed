@@ -1,0 +1,3 @@
+Hostname|UCT Date_time|Dictionary bytes|Effective Iterations|Iterations|Number of Copies|Total size|Cryptographic Hash|WallTime|UserTime|Systime|
+opti.sea2cloud.com|20220312_1018|976241|5Kib|5120|1|4998353920|sha256sum|48.57|43.80|5.18|102|114|964
+opti.sea2cloud.com|20220312_1018|976241|5Kib|10|512|4998353920|sha256sum|29.83|29.06|0.77|167|172|6491
